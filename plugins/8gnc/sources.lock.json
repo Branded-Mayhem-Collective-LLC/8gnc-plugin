@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-18",
+  "catalogEntryCount": 37,
+  "uniqueSpecialistSkillCount": 36,
+  "routerSkillCount": 1,
+  "installedSkillFolderCount": 37,
+  "sharedDependencies": {
+    "deep-research": [
+      "brandprint-engine",
+      "productprint-engine"
+    ]
+  },
+  "sources": [
+    {
+      "name": "brandprint-engine",
+      "repository": "https://github.com/Branded-Mayhem-Collective-LLC/brandprint-engine",
+      "commit": "352e249fe0af132dd7c0c9b714602fdcd6ea14eb",
+      "skills": [
+        "brand-revival",
+        "brand-strategy-compiler",
+        "brandprint-engine-guide",
+        "brandprint-tier-a",
+        "brandprint-tier-b",
+        "brandprint-tier-c",
+        "competitive-positioning-audit",
+        "competitive-teardown",
+        "core-human-truth",
+        "deep-research"
+      ]
+    },
+    {
+      "name": "productprint-engine",
+      "repository": "https://github.com/Branded-Mayhem-Collective-LLC/productprint-engine",
+      "commit": "6f88ea68b7a9e397e7743020f2d4b3de0e6adfbc",
+      "skills": [
+        "core-strategic-truth",
+        "productprint-engine-guide",
+        "productprint-tier-a",
+        "productprint-tier-b",
+        "productprint-tier-c",
+        "strategy-thesis-compiler",
+        "thesis-stress-test"
+      ],
+      "sharedSkills": [
+        "deep-research"
+      ]
+    },
+    {
+      "name": "content-creative-lab",
+      "repository": "https://github.com/Branded-Mayhem-Collective-LLC/content-creative-lab",
+      "commit": "89a68acc17aeb87d4e0704397f95c20cec2e8bf7",
+      "skills": [
+        "ai-focus-group",
+        "creative-thinking-ai",
+        "humanize",
+        "humanize-ig",
+        "linkedin-authority",
+        "mayhem-method-ai-use",
+        "story-spine",
+        "voice-profiler"
+      ]
+    },
+    {
+      "name": "seo-visibility-toolkit",
+      "repository": "https://github.com/Branded-Mayhem-Collective-LLC/seo-visibility-toolkit",
+      "commit": "dd2f2470fdc017c93d94eb058ea78a9385eea719",
+      "skills": [
+        "ai-agent-readiness",
+        "ai-visibility-tracking",
+        "data-density-commerce",
+        "dataforseo",
+        "local-services-seo"
+      ]
+    },
+    {
+      "name": "conversion-architecture",
+      "repository": "https://github.com/Branded-Mayhem-Collective-LLC/conversion-architecture",
+      "commit": "9ec51286b00b21df9a2c00d5592f3c642518b542",
+      "skills": [
+        "fairness-anchor-ladder",
+        "neuro-design",
+        "ux-ui-psych"
+      ]
+    },
+    {
+      "name": "sales-accelerator",
+      "repository": "https://github.com/Branded-Mayhem-Collective-LLC/sales-accelerator",
+      "commit": "378c67de8d07067980873fdf87dbb6e5933fb467",
+      "skills": [
+        "outreach-diagnosis",
+        "pitching-pivot",
+        "sales-simulator"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "8gnc Diagnostic Router"
+  short_description: "Route brand and growth problems to the right method"
+  default_prompt: "Use $diagnose-brand-growth to diagnose what is actually blocking this brand and route the work to the right 8gnc method."

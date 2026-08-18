@@ -1,0 +1,42 @@
+{
+  "name": "8gnc",
+  "version": "0.1.0",
+  "description": "Diagnose brand and growth problems, route each one to the right 8gnc method, and produce evidence-backed strategy, content, visibility, conversion, and sales artifacts.",
+  "author": {
+    "name": "Branded Mayhem Collective LLC",
+    "email": "hello@brandedmayhem.com",
+    "url": "https://8gnc.io"
+  },
+  "homepage": "https://8gnc.io/products",
+  "license": "MIT",
+  "keywords": [
+    "brand-strategy",
+    "product-strategy",
+    "content",
+    "seo",
+    "conversion",
+    "sales"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "8gnc",
+    "shortDescription": "One diagnostic front door for the 8gnc method stack",
+    "longDescription": "Start with the problem, not a menu. 8gnc diagnoses the constraint, names the evidence and uncertainty, then routes the work into the right brand, product, content, visibility, conversion, or sales method.",
+    "developerName": "8gnc",
+    "category": "Productivity",
+    "capabilities": [
+      "Research",
+      "Strategy",
+      "Content generation"
+    ],
+    "websiteURL": "https://8gnc.io/products",
+    "defaultPrompt": [
+      "Use 8gnc to diagnose what is actually blocking my brand before recommending a tactic.",
+      "Use 8gnc to pressure-test our positioning against the market and show the white space.",
+      "Use 8gnc to turn this product strategy into a decision-ready plan with risks and next steps."
+    ],
+    "brandColor": "#FF2E12",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg"
+  }
+}
