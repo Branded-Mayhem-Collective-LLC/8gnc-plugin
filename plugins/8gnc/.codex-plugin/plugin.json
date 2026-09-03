@@ -1,13 +1,14 @@
 {
   "name": "8gnc",
-  "version": "0.1.0",
-  "description": "Diagnose brand and growth problems, route each one to the right 8gnc method, and produce evidence-backed strategy, content, visibility, conversion, and sales artifacts.",
+  "version": "0.2.0",
+  "description": "Diagnose what is blocking brand growth, separate evidence from assumption, and route the work into the smallest useful 8gnc method.",
   "author": {
     "name": "Branded Mayhem Collective LLC",
     "email": "hello@brandedmayhem.com",
     "url": "https://8gnc.io"
   },
-  "homepage": "https://8gnc.io/products",
+  "homepage": "https://8gnc.io/products/8gnc",
+  "repository": "https://github.com/Branded-Mayhem-Collective-LLC/8gnc-plugin",
   "license": "MIT",
   "keywords": [
     "brand-strategy",
@@ -19,17 +20,19 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "8gnc",
-    "shortDescription": "One diagnostic front door for the 8gnc method stack",
-    "longDescription": "Start with the problem, not a menu. 8gnc diagnoses the constraint, names the evidence and uncertainty, then routes the work into the right brand, product, content, visibility, conversion, or sales method.",
-    "developerName": "8gnc",
+    "displayName": "8gnc — Brand Growth Diagnostic",
+    "shortDescription": "Find the constraint before you buy the tactic.",
+    "longDescription": "Bring an unclear offer, a stalled brand, weak conversion, invisible search presence, or a sales motion that is not moving. 8gnc names the primary constraint, separates evidence from inference, and routes the work into the smallest useful brand, product, content, visibility, conversion, or sales method.",
+    "developerName": "Branded Mayhem Collective LLC",
     "category": "Productivity",
     "capabilities": [
       "Research",
       "Strategy",
       "Content generation"
     ],
-    "websiteURL": "https://8gnc.io/products",
+    "websiteURL": "https://8gnc.io/products/8gnc",
+    "privacyPolicyURL": "https://8gnc.io/products/8gnc/privacy",
+    "termsOfServiceURL": "https://8gnc.io/products/8gnc/terms",
     "defaultPrompt": [
       "Use 8gnc to diagnose what is actually blocking my brand before recommending a tactic.",
       "Use 8gnc to pressure-test our positioning against the market and show the white space.",

@@ -1,5 +1,8 @@
 {
-  "name": "8gnc-local",
+  "name": "8gnc",
+  "interface": {
+    "displayName": "8gnc"
+  },
   "plugins": [
     {
       "name": "8gnc",
