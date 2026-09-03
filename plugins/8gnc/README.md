@@ -1,21 +1,16 @@
-# 8gnc
+# 8gnc — Brand Growth Diagnostic
 
-One diagnostic front door for the complete 8gnc method stack in ChatGPT and Codex.
+Find the constraint before you buy the tactic.
 
-Start with the problem. The `diagnose-brand-growth` skill identifies the primary constraint, distinguishes evidence from inference, and routes the work into the smallest useful sequence across brand, product, content, visibility, conversion, and sales.
+This is the distributable plugin directory shared by Claude Code, Codex, and the ChatGPT/Codex Plugins Directory. Its `skills/` tree contains one diagnostic router and 36 specialist skills.
 
-## What is included
+## What it does
 
-- 36 unique specialist skills adapted from the six existing public 8gnc packages
-- one new diagnostic router
-- pinned source provenance, MIT license texts, and original notices
-- package-relative helpers and provider-neutral instructions
-
-The public catalog counts `deep-research` in both Brandprint and Productprint. This package keeps one shared real copy, producing 37 installed skill folders: 36 specialists plus the router.
+Start with the problem. `diagnose-brand-growth` names the primary constraint, distinguishes evidence from inference, and routes the work into the smallest useful sequence across brand, product, content, visibility, conversion, and sales.
 
 ## Boundary
 
-Version 0.1.0 is skills-only. It does not connect to a client portal, agentic website, CRM, approval system, or private intelligence layer. Authenticated client intelligence belongs in a later, separately governed MCP phase.
+Version 0.2.0 is skills-only. It does not connect to a client portal, agentic website, CRM, approval system, or private intelligence layer. It can use only evidence the user provides, files exposed by the current host, lawful public research, and locally configured credentials where a specialist explicitly supports them.
 
 This plugin may draft and recommend. Approval of an artifact is not authorization to publish, deploy, send, purchase, or mutate an external system.
 
@@ -23,7 +18,7 @@ This plugin may draft and recommend. Approval of an artifact is not authorizatio
 
 Exact source revisions are in `sources.lock.json`; license texts are under `third_party/`.
 
-From the plugin directory, run:
+From this directory, run:
 
 ```bash
 python3 scripts/validate_bundle.py

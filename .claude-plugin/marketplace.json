@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "8gnc",
+  "description": "The public marketplace for 8gnc — Brand Growth Diagnostic.",
+  "owner": {
+    "name": "Branded Mayhem Collective LLC",
+    "email": "hello@brandedmayhem.com",
+    "url": "https://8gnc.io"
+  },
+  "plugins": [
+    {
+      "name": "8gnc",
+      "displayName": "8gnc — Brand Growth Diagnostic",
+      "source": "./plugins/8gnc",
+      "description": "Diagnose what is blocking brand growth, separate evidence from assumption, and route the work into the smallest useful method.",
+      "category": "productivity",
+      "tags": [
+        "brand",
+        "strategy",
+        "growth",
+        "research",
+        "positioning"
+      ]
+    }
+  ]
+}

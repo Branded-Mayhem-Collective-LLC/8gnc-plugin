@@ -3,7 +3,7 @@
 de_emdash.py — Post-processor for humanize skill output.
 
 Replaces em dashes with the punctuation devices a writer actually uses.
-Em-dash overuse is one of the strongest AI-detection signals; most human
+Em-dash overuse is a common generic-model writing habit; many human
 writers reach for other devices (parentheses, hyphens, hard sentence
 breaks) far more often than AI-generated text does.
 

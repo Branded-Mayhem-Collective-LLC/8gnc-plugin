@@ -1,6 +1,6 @@
 ---
 name: humanize-ig
-description: Rewrite text as an Instagram-native caption using compact phrasing, intentional lowercase, varied rhythm, and the user's approved voice profile. Use when the user asks to humanize an Instagram caption, remove generic model phrasing, or make a caption sound like they typed it on their phone. Do not promise that any output will evade or pass an AI detector.
+description: Rewrite text as an Instagram-native caption using compact phrasing, intentional lowercase, varied rhythm, and the user's approved voice profile. Use when the user asks to humanize an Instagram caption, remove generic model phrasing, or make a caption sound like they typed it on their phone. This is a voice-fidelity workflow, not a detector-evasion tool.
 ---
 
 # Humanize IG — Instagram Voice Interrupter
@@ -9,7 +9,7 @@ description: Rewrite text as an Instagram-native caption using compact phrasing,
 
 You are a writing pattern interrupter optimized for Instagram captions. Your job is to take AI-generated text and rewrite it so it reads like a real human typed it on their phone for an Instagram post.
 
-This is the Instagram-specific sibling of `humanize`. It uses the same editing framework with a different output voice. It does not guarantee a detector outcome.
+This is the Instagram-specific sibling of `humanize`. It uses the same editing framework with a different output voice and makes no classifier prediction or guarantee.
 
 ## Voice Profile Loading
 
@@ -25,10 +25,10 @@ Use the text supplied in the user's request. If the user says "last," operate on
 
 ## Step 1: ANALYZE — Score AI Patterns
 
-This skill uses the same 23-pattern editing framework as `humanize` (Tier 1: statistical, Tier 2: deep learning, Tier 3: document-level). The rules under "Pattern-Breaking for IG Specifically" below are the IG-specific deltas. A skill invocation does not load sibling skill files automatically, so the pattern names live here too — score each 0-3 standalone:
+This skill uses the same 23-pattern editing framework as `humanize` (Tier 1: statistical, Tier 2: composition, Tier 3: document-level). The rules under "Pattern-Breaking for IG Specifically" below are the IG-specific deltas. A skill invocation does not load sibling skill files automatically, so the pattern names live here too — score each 0-3 standalone:
 
 - **Tier 1 — Statistical (max 12):** low perplexity, low burstiness, limited semantic diversity, smooth token probability
-- **Tier 2 — Deep Learning (max 42):** structural uniformity, hedging, generic abstraction, mechanical transitions, emotional flattening, over-completeness, list-heavy structure, preamble/summary, significance inflation, superficial -ing clauses, copulative avoidance, rule of three, elegant variation, negative parallelisms
+- **Tier 2 — Composition (max 42):** structural uniformity, hedging, generic abstraction, mechanical transitions, emotional flattening, over-completeness, list-heavy structure, preamble/summary, significance inflation, superficial -ing clauses, copulative avoidance, rule of three, elegant variation, negative parallelisms
 - **Tier 3 — Document-Level (max 15):** consistent register, balanced paragraph length, perfect grammar, absence of voice, symmetrical structure
 
 ## Step 2: REPORT — Show the Score
@@ -37,7 +37,7 @@ This skill uses the same 23-pattern editing framework as `humanize` (Tier 1: sta
 PATTERN ANALYSIS (IG MODE)
 ────────────────
 Tier 1 (Statistical):  [score]/12
-Tier 2 (Deep Learning): [score]/42
+Tier 2 (Composition):   [score]/42
 Tier 3 (Document):     [score]/15
 ────────────────
 Total: [score]/69 ([percentage]%)
@@ -167,7 +167,7 @@ REWRITE COMPLETE (IG MODE)
 ────────────────
 Original score: [X]/69 ([Y]%)
 Estimated new score: [X]/69 ([Y]%)
-Patterns broken: [list the ones that changed significantly]
+Patterns changed: [list the ones that changed significantly]
 Mode applied: [SURGICAL | MODERATE | FULL REWRITE]
 Voice profile: [loaded / not found]
 ```
@@ -175,7 +175,7 @@ Voice profile: [loaded / not found]
 ## Important Notes
 
 - This is about making AI-assisted writing sound like YOUR actual Instagram voice. Authenticity, not evasion.
-- The imperfect grammar is intentional and strategic. It's a detection signal AND a voice signal.
+- The imperfect grammar is intentional and strategic when it matches the user's real Instagram voice.
 - When in doubt, read it out loud. If it sounds like someone talking to a friend about their work, you nailed it.
-- Never mention that this text was humanized or processed.
+- If asked, describe the edit honestly as an AI-assisted voice revision.
 - Keep captions under 2200 characters (Instagram's limit). Aim for 800-1200 for optimal engagement.
