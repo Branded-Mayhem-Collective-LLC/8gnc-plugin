@@ -20,7 +20,7 @@ CODEX_MARKETPLACE_PATH = REPO_ROOT / ".agents" / "plugins" / "marketplace.json"
 CLAUDE_MARKETPLACE_PATH = REPO_ROOT / ".claude-plugin" / "marketplace.json"
 
 EXPECTED_NAME = "8gnc"
-EXPECTED_VERSION = "0.2.0"
+EXPECTED_VERSION = "0.2.1"
 EXPECTED_DISPLAY_NAME = "8gnc — Brand Growth Diagnostic"
 EXPECTED_HOMEPAGE = "https://8gnc.io/products/8gnc"
 EXPECTED_REPOSITORY = "https://github.com/Branded-Mayhem-Collective-LLC/8gnc-plugin"
@@ -182,7 +182,7 @@ def main() -> int:
 
     for component in FORBIDDEN_ROOT_COMPONENTS:
         if (PLUGIN_ROOT / component).exists():
-            fail(errors, f"0.2.0 must remain skills-only; unexpected {component} found")
+            fail(errors, f"0.2.1 must remain skills-only; unexpected {component} found")
 
     skill_dirs = sorted(
         path.parent for path in SKILLS_ROOT.glob("*/SKILL.md") if path.is_file()

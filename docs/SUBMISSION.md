@@ -1,13 +1,13 @@
 # Marketplace Submission Packet
 
-Use this document as the canonical copy source for the Claude Community and OpenAI submissions for version 0.2.0.
+Use this document as the canonical copy source for the Claude Community and OpenAI submissions for version 0.2.1.
 
 ## Identity
 
 - **Plugin name:** 8gnc — Brand Growth Diagnostic
 - **Technical identifier:** `8gnc`
 - **Developer:** Branded Mayhem Collective LLC
-- **Version:** 0.2.0
+- **Version:** 0.2.1
 - **Release stage:** Public Beta
 - **Category:** Productivity
 - **License:** MIT
@@ -54,7 +54,7 @@ Some optional specialists can use user-configured third-party research services 
 
 ## Release notes
 
-Initial public-beta submission of 8gnc — Brand Growth Diagnostic. Version 0.2.0 packages one diagnostic router and 36 specialist skills in a provider-neutral, skills-only bundle for Claude Code, ChatGPT, and Codex. It adds matching platform manifests, public policy and support URLs, pinned source provenance, deterministic archive packaging, and explicit boundaries against private-system access or external mutations.
+Initial public-beta submission of 8gnc — Brand Growth Diagnostic. Version 0.2.1 packages the same diagnostic router and 36 specialist skills as 0.2.0 in a provider-neutral, skills-only bundle for Claude Code, ChatGPT, and Codex. This patch makes the two public SVG assets directory-compliant with square canvases; it does not change plugin behavior, skill content, permissions, or data handling.
 
 ## Claude submission
 
@@ -65,7 +65,7 @@ Submit the repository through <https://platform.claude.com/plugins/submit>. The 
 In the OpenAI plugin submission portal:
 
 1. Select **Create plugin** and **Skills only**.
-2. Upload `dist/8gnc-0.2.0-openai.zip`.
+2. Upload `dist/8gnc-0.2.1-openai.zip`.
 3. Review the generated Codex manifest against the committed `.codex-plugin/plugin.json`.
 4. Use the identity, listing copy, URLs, prompts, release notes, availability, and test cases in this repository.
 5. Submit for review only after every scan and attestation matches the final release.

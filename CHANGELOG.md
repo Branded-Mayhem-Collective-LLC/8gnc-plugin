@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 — Directory asset compatibility
+
+- Gives the icon and logo square SVG canvases required by the OpenAI plugin directory.
+- Preserves the existing artwork, 37-skill implementation, permissions, and data-handling boundary.
+
 ## 0.2.0 — Public Beta
 
 - Adds a Claude Code plugin manifest and public marketplace.
