@@ -18,7 +18,7 @@ This repository packages the same 37-skill, skills-only plugin for Claude Code, 
 ### Codex
 
 ```bash
-codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.2.0
+codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.2.1
 codex plugin add 8gnc@8gnc
 ```
 
@@ -46,7 +46,7 @@ The source packages historically counted `deep-research` in both Brandprint and 
 
 ## Public beta boundary
 
-Version 0.2.0 is skills-only. It has no MCP server, hooks, bundled or publisher-operated authenticated integrations, or background service.
+Version 0.2.1 is skills-only. It has no MCP server, hooks, bundled or publisher-operated authenticated integrations, or background service.
 
 The plugin can use evidence you provide, files the current host makes available, lawful public research, and locally configured credentials when a specialist explicitly supports them. It cannot independently access a CRM, client portal, approval system, private intelligence layer, or other private account.
 

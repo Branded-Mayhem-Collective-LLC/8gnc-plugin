@@ -10,7 +10,7 @@ Start with the problem. `diagnose-brand-growth` names the primary constraint, di
 
 ## Boundary
 
-Version 0.2.0 is skills-only. It does not connect to a client portal, agentic website, CRM, approval system, or private intelligence layer. It can use only evidence the user provides, files exposed by the current host, lawful public research, and locally configured credentials where a specialist explicitly supports them.
+Version 0.2.1 is skills-only. It does not connect to a client portal, agentic website, CRM, approval system, or private intelligence layer. It can use only evidence the user provides, files exposed by the current host, lawful public research, and locally configured credentials where a specialist explicitly supports them.
 
 This plugin may draft and recommend. Approval of an artifact is not authorization to publish, deploy, send, purchase, or mutate an external system.
 

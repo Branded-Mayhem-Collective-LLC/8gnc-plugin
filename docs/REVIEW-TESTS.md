@@ -1,6 +1,6 @@
 # Marketplace Review Tests
 
-These cases test the final 0.2.0 file tree in a clean host environment. No private account or paid credential is required.
+These cases test the final 0.2.1 file tree in a clean host environment. No private account or paid credential is required.
 
 ## Positive cases
 

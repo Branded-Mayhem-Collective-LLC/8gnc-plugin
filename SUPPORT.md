@@ -1,6 +1,6 @@
 # Support
 
-8gnc 0.2.0 is a public beta.
+8gnc 0.2.1 is a public beta.
 
 ## Before opening an issue
 
