@@ -8,9 +8,9 @@ Version 0.3.0 keeps the exact 37-skill implementation and adds one optional, rea
 
 ## Release status
 
-The v0.3 implementation is staged in source. `https://mcp.8gnc.io/mcp` is the planned public endpoint and must not be described as available until deployment and clean-install verification are complete. The current tagged public release remains v0.2.1 until v0.3.0 is separately approved and published.
+Version 0.3.0 is the current public beta. The read-only renderer is live at `https://mcp.8gnc.io/mcp` and was verified from an unauthenticated clean client before publication.
 
-## Install after v0.3.0 is released
+## Install
 
 ### Claude Code
 

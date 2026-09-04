@@ -1,6 +1,6 @@
 # Marketplace Submission Packet
 
-Use this document as the canonical copy source for a future 0.3.0 OpenAI update and the skills-only Claude listing. This is staged copy, not evidence that an endpoint is deployed or a submission has been filed.
+Use this document as the canonical copy source for the 0.3.0 OpenAI update and the skills-only Claude listing. The production endpoint is live; directory submission and approval remain separately tracked platform actions.
 
 ## Identity
 
@@ -46,7 +46,7 @@ In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as 
 
 - Submission type: **Skills plus MCP Apps UI**
 - Installed skill folders: **37**
-- MCP servers: **One planned public HTTP endpoint**
+- MCP servers: **One public HTTP endpoint**
 - Tools: **One — `render_working_diagnosis`**
 - UI resources: **One — `ui://8gnc/working-diagnosis/v1.html`**
 - Tool properties: **read-only, non-destructive, closed-world**
@@ -56,7 +56,7 @@ In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as 
 - Outbound server fetches: **None**
 - Reviewer credentials: **Not required**
 
-The endpoint is `https://mcp.8gnc.io/mcp`. Do not submit or attest that it is operational until production deployment and unauthenticated clean-client verification are complete.
+The endpoint is `https://mcp.8gnc.io/mcp`. Production deployment and unauthenticated clean-client verification completed on 2026-09-04.
 
 ## Claude implementation declaration
 

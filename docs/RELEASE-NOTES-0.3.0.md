@@ -1,4 +1,4 @@
-# 8gnc 0.3.0 Release Notes — Draft
+# 8gnc 0.3.0 Release Notes
 
 ## Working Diagnosis interface
 
@@ -11,8 +11,8 @@ The renderer does not diagnose the business, perform research, decide how long e
 ## Platform behavior
 
 - **Claude Code:** the same 37 skills, skills-only. No 8gnc MCP server is declared.
-- **Codex:** 37 skills plus the staged read-only renderer connection.
-- **ChatGPT:** directory submission may include the same renderer and interface after deployment and review.
+- **Codex:** 37 skills plus the live read-only renderer connection.
+- **ChatGPT:** the same renderer and interface are ready for directory review; availability remains subject to OpenAI review.
 
 ## Privacy and safety
 
@@ -20,4 +20,4 @@ The renderer is stateless and authentication-free. It has no storage, analytics,
 
 ## Release status
 
-These notes describe staged source code. They do not announce a live endpoint, published tag, directory approval, or installation availability. Release requires final validation, a clean deterministic package, deployment verification, clean installs, updated public policies, and explicit publication approval.
+Version 0.3.0 is the current public beta. The production endpoint is live at <https://mcp.8gnc.io/mcp>. Directory approval and discoverability remain separate platform-controlled states.
