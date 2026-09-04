@@ -11,6 +11,7 @@ const workingDiagnosis = () => ({
   status: "working" as const,
   input: { summary: "Traffic is growing, but qualified consultations are flat." },
   primaryConstraint: "The offer page does not make the next decision legible.",
+  primaryConstraintEvidenceIds: ["analytics-aug", "owner-report"],
   confidence: "medium" as const,
   evidence: [
     {
@@ -98,6 +99,14 @@ describe("WorkingDiagnosisV1Schema", () => {
     unknown.inferences[0]!.basedOnEvidenceIds = ["not-supplied"];
     const unknownResult = WorkingDiagnosisV1Schema.safeParse(unknown);
     expect(unknownResult.success).toBe(false);
+
+    const duplicateConstraintReference = workingDiagnosis();
+    duplicateConstraintReference.primaryConstraintEvidenceIds = ["analytics-aug", "analytics-aug"];
+    expect(WorkingDiagnosisV1Schema.safeParse(duplicateConstraintReference).success).toBe(false);
+
+    const unknownConstraintReference = workingDiagnosis();
+    unknownConstraintReference.primaryConstraintEvidenceIds = ["not-supplied"];
+    expect(WorkingDiagnosisV1Schema.safeParse(unknownConstraintReference).success).toBe(false);
   });
 
   it("allows only the exact 37 installed methods", () => {

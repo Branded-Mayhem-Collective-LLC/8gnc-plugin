@@ -8,7 +8,7 @@ This runbook separates reversible release preparation from deployment and public
 - Claude Code remains skills-only: its marketplace entry uses `source: "./"`, `strict: false`, and `skills: "./plugins/8gnc/skills/"`, with no MCP declaration or root `.mcp.json`.
 - Codex/ChatGPT declare exactly one MCP server, `eightgnc`, at `https://mcp.8gnc.io/mcp`.
 - The server exposes exactly one read-only tool, `render_working_diagnosis`, and one UI resource, `ui://8gnc/working-diagnosis/v1.html`.
-- The renderer validates and presents a caller-supplied diagnosis; it does not perform diagnosis or research.
+- The renderer schema-validates, normalizes, serializes, and presents a caller-supplied diagnosis; it does not perform diagnosis, truth verification, or research.
 - The server has no authentication, storage, analytics, telemetry, cookies, outbound fetches, CRM, email, sending, publishing, deployment, or private-system access.
 - Structured content and the Markdown fallback carry the complete user-facing result. UI metadata is presentation-only.
 

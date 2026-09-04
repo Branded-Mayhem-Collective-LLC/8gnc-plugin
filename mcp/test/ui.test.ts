@@ -14,8 +14,9 @@ describe("Working Diagnosis MCP Apps UI", () => {
       "Evidence threshold not met. Read-only. Nothing changes until you decide.",
     );
     expect(WORKING_DIAGNOSIS_UI).toContain(
-      "Uses the evidence you provide and lawful public sources. No CRM, email, publishing, or private-system access.",
+      "Presents evidence supplied by the host, which may include lawful public sources. The renderer does not fetch sources or access CRM, email, publishing, or private systems.",
     );
+    expect(WORKING_DIAGNOSIS_UI).toContain("diagnosis.primaryConstraintEvidenceIds");
     expect(WORKING_DIAGNOSIS_UI.match(/<section class="panel"[^>]*role="tabpanel"/g)).toHaveLength(4);
     expect(WORKING_DIAGNOSIS_UI).toContain('data-view="input"');
     expect(WORKING_DIAGNOSIS_UI).toContain('data-view="diagnosis"');

@@ -38,7 +38,7 @@ These cases cover the staged 0.3.0 source in a clean host environment. No privat
 
 ### 6. Complete working diagnosis
 
-- **Fixture:** A valid `WorkingDiagnosisV1` with dated provenance, evidence IDs, evidence-linked inferences, one primary constraint, confidence, unknowns, a one-to-three-step route, and a human decision gate.
+- **Fixture:** A valid `WorkingDiagnosisV1` with dated provenance, evidence IDs, an evidence-linked primary constraint, evidence-linked inferences, confidence, unknowns, a one-to-three-step route, and a human decision gate.
 - **Expected tool result:** The structured result preserves the diagnosis and includes a complete Markdown fallback.
 - **Expected interface:** Input, Working Diagnosis, smallest useful route, and fallback views show the same facts. The interface adds no new claim.
 

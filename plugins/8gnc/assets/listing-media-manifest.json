@@ -26,7 +26,7 @@
         "width": 1600,
         "height": 1000
       },
-      "sha256": "c1065a61aaef10a85e42c370d652a28d3d7a9723a17cee613612fe0304ada192",
+      "sha256": "a552a172bc5b61e97112e725d7ab89dd379b661a31781ac8338dc05ee30fbbbf",
       "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
       "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
     },
@@ -38,7 +38,7 @@
         "width": 1600,
         "height": 1000
       },
-      "sha256": "0b212a7bc4dddc12eb6494a7a6a8c4d3f6ce92eea87071f380b9378243bf135d",
+      "sha256": "d2f0f7dc29e6371569ce2b892b1133a9b24a5b8ae7416d40b2bb695f027aab68",
       "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
       "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
     },
@@ -50,7 +50,7 @@
         "width": 1600,
         "height": 1000
       },
-      "sha256": "7b127a80f1e4d08eb0760bdbe7793f6e8756babbf71a1cb4e71edb4a08cc38c3",
+      "sha256": "2b8b60e31d106a714667668da148892c0ccc1dbb727fb7def338682bbac4693e",
       "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
       "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
     },
@@ -62,7 +62,7 @@
         "width": 1600,
         "height": 1000
       },
-      "sha256": "87b30ff106b7bc6ccdbe8d25a962b7f1d5495255774451bfd0b4c0aac1d266c0",
+      "sha256": "78dd9088ce26089138f65768f091f7140b40d7a51813af63e04040dc71c9a7ea",
       "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
       "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
     }

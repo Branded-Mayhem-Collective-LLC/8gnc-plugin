@@ -6,7 +6,7 @@ Version 0.3.0 keeps the same 37-skill Brand Growth Diagnostic and adds an option
 
 After the host has produced an evidence-backed working diagnosis, one read-only tool can render the result as a compact case file: the problem supplied, evidence and inferences, the primary constraint, the smallest useful route, and the decision that remains with the user. A complete Markdown version is always returned for hosts that do not render the interface.
 
-The renderer does not diagnose the business, perform research, decide how long evidence remains useful, or verify that a claim is true. It validates and presents the structured diagnosis it is given. If provenance or a valid non-future as-of date is missing, the result must be blocked or rejected instead of filled with invented support.
+The renderer does not diagnose the business, perform research, decide how long evidence remains useful, or verify that a claim is true. It schema-validates, normalizes, serializes, and presents the structured diagnosis it is given. The primary constraint must cite known evidence IDs. If required evidence, provenance, or a valid non-future as-of date is missing, the result must be blocked or rejected instead of filled with invented support.
 
 ## Platform behavior
 

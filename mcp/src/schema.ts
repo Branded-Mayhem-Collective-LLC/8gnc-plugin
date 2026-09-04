@@ -106,6 +106,10 @@ export const WorkingDiagnosisSchema = z
     status: z.literal("working"),
     input: DiagnosisInputSchema,
     primaryConstraint: text("primaryConstraint", 2_000),
+    primaryConstraintEvidenceIds: z
+      .array(z.string().trim().min(1))
+      .min(1, "primaryConstraint must cite at least one evidence id")
+      .max(12),
     confidence: z.enum(["low", "medium", "high"]),
     evidence: z.array(EvidenceSchema).min(1, "a working diagnosis requires evidence").max(24),
     inferences: z.array(InferenceSchema).max(16),
@@ -131,6 +135,26 @@ export const WorkingDiagnosisSchema = z
         });
       }
       evidenceIds.add(item.id);
+    }
+
+    const constraintEvidenceIds = new Set<string>();
+    for (const [referenceIndex, evidenceId] of diagnosis.primaryConstraintEvidenceIds.entries()) {
+      if (constraintEvidenceIds.has(evidenceId)) {
+        context.addIssue({
+          code: "custom",
+          message: `duplicate primary constraint evidence reference: ${evidenceId}`,
+          path: ["primaryConstraintEvidenceIds", referenceIndex]
+        });
+      }
+      constraintEvidenceIds.add(evidenceId);
+
+      if (!evidenceIds.has(evidenceId)) {
+        context.addIssue({
+          code: "custom",
+          message: `unknown primary constraint evidence reference: ${evidenceId}`,
+          path: ["primaryConstraintEvidenceIds", referenceIndex]
+        });
+      }
     }
 
     for (const [inferenceIndex, inference] of diagnosis.inferences.entries()) {

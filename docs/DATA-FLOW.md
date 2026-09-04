@@ -29,7 +29,7 @@ render_working_diagnosis
 
 ## Data sent to the renderer
 
-The renderer receives only the fields in the tool call. Depending on the result state, those fields may include the user's problem summary, evidence statements, provenance labels, as-of dates, inferences tied to evidence IDs, unknowns, confidence, the smallest useful route, and a human decision gate.
+The renderer receives only the fields in the tool call. Depending on the result state, those fields may include the user's problem summary, evidence statements, provenance labels, as-of dates, a primary constraint tied to evidence IDs, inferences tied to evidence IDs, unknowns, confidence, the smallest useful route, and a human decision gate.
 
 Users and hosts should not place credentials, secrets, raw private exports, or unnecessary personal data in a diagnosis. Evidence can be summarized and redacted before the tool call.
 

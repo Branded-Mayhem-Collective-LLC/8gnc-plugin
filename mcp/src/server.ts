@@ -37,7 +37,7 @@ export function create8gncServer(): McpServer {
     },
     {
       instructions:
-        "Use the installed 8gnc skills to complete the diagnosis before calling render_working_diagnosis. Supply only evidence-backed observations and clearly labeled inferences. If required provenance or a valid as-of date is missing, return status 'blocked'. The renderer validates and presents a supplied diagnosis; it does not originate the diagnosis or decide whether it is correct."
+        "Use the installed 8gnc skills to complete the diagnosis before calling render_working_diagnosis. Supply only evidence-backed observations and clearly labeled inferences. Cite the evidence IDs supporting the primary constraint. If required evidence, provenance, or a valid as-of date is missing, return status 'blocked'. The renderer schema-validates, normalizes, serializes, and presents a supplied diagnosis; it does not originate the diagnosis or decide whether it is correct."
     }
   );
 
@@ -67,7 +67,7 @@ export function create8gncServer(): McpServer {
     {
       title: "Render Working Diagnosis",
       description:
-        "Validate and present an already-completed 8gnc WorkingDiagnosisV1. This renderer does not diagnose, research, fetch, contact, store, publish, send, approve, or change anything. Use status 'blocked' when required provenance or a valid as-of date is missing.",
+        "Schema-validate, normalize, serialize, and present an already-completed 8gnc WorkingDiagnosisV1. This renderer does not diagnose, verify truth, research, fetch, contact, store, publish, send, approve, or change anything. Use status 'blocked' when required evidence, provenance, or a valid as-of date is missing.",
       inputSchema: WorkingDiagnosisV1Schema,
       outputSchema: WorkingDiagnosisResultV1Schema,
       annotations: {

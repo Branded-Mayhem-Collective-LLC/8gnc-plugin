@@ -6,6 +6,11 @@
       "summary": "Synthetic demo: a fictional independent studio is attracting qualified visitors, but too few reach the inquiry step."
     },
     "primaryConstraint": "The fictional offer creates interest without giving buyers one clear next decision.",
+    "primaryConstraintEvidenceIds": [
+      "demo_choice_count",
+      "demo_inquiry_report",
+      "demo_funnel_table"
+    ],
     "confidence": "medium",
     "evidence": [
       {

@@ -626,7 +626,7 @@ export const WORKING_DIAGNOSIS_UI = `<!doctype html>
 
     <div class="status-strip" aria-label="Capability boundary">
       <p id="evidence-status">Read-only. Nothing changes until you decide.</p>
-      <p>Uses the evidence you provide and lawful public sources. No CRM, email, publishing, or private-system access.</p>
+      <p>Presents evidence supplied by the host, which may include lawful public sources. The renderer does not fetch sources or access CRM, email, publishing, or private systems.</p>
     </div>
 
     <nav class="tabs" role="tablist" aria-label="Working diagnosis views">
@@ -658,6 +658,7 @@ export const WORKING_DIAGNOSIS_UI = `<!doctype html>
           <div>
             <span class="field-label">Primary constraint</span>
             <p class="constraint" id="primary-constraint">Awaiting evidence.</p>
+            <span class="record-meta" id="constraint-evidence">EVIDENCE / AWAITING RESULT</span>
           </div>
           <div class="stamp" id="confidence-stamp">Confidence / —</div>
         </div>
@@ -916,6 +917,14 @@ export const WORKING_DIAGNOSIS_UI = `<!doctype html>
           working.hidden = false;
           setText("evidence-status", "Evidence-backed. Read-only. Nothing changes until you decide.", "Evidence-backed. Read-only. Nothing changes until you decide.");
           setText("primary-constraint", diagnosis.primaryConstraint, "Primary constraint not supplied.");
+          var constraintEvidenceIds = asList(diagnosis.primaryConstraintEvidenceIds).filter(function (id) {
+            return typeof id === "string" && id.trim();
+          });
+          setText(
+            "constraint-evidence",
+            constraintEvidenceIds.length ? "EVIDENCE / " + constraintEvidenceIds.join(", ") : "EVIDENCE / NOT SUPPLIED",
+            "EVIDENCE / NOT SUPPLIED"
+          );
           setText("confidence-stamp", "Confidence / " + asText(diagnosis.confidence, "—"), "Confidence / —");
           renderEvidence(asList(diagnosis.evidence));
           renderInferences(asList(diagnosis.inferences));

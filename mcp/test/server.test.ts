@@ -66,6 +66,7 @@ describe("8gnc MCP contract", () => {
         status: "working",
         input: { summary: "Qualified traffic grows while consultation starts stay flat." },
         primaryConstraint: "Offer clarity is the likeliest current constraint.",
+        primaryConstraintEvidenceIds: ["august-funnel"],
         confidence: "medium",
         evidence: [
           {

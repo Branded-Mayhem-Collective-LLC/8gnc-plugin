@@ -10,6 +10,7 @@ describe("renderWorkingDiagnosisMarkdown", () => {
       status: "working",
       input: { summary: "The pipeline is stalled." },
       primaryConstraint: "The offer is difficult to compare.",
+      primaryConstraintEvidenceIds: ["page-review"],
       confidence: "medium",
       evidence: [
         {
@@ -40,10 +41,11 @@ describe("renderWorkingDiagnosisMarkdown", () => {
     const markdown = renderWorkingDiagnosisMarkdown(diagnosis);
     expect(markdown).toContain("# Working Diagnosis");
     expect(markdown).toContain("## Evidence");
+    expect(markdown).toContain("**Constraint evidence:** page-review");
     expect(markdown).toContain("Owner-supplied page capture.");
     expect(markdown).toContain("## Smallest useful route");
     expect(markdown).toContain("`ux-ui-psych`");
-    expect(markdown).toContain("No CRM, email, publishing, or private-system access.");
+    expect(markdown).toContain("The renderer does not fetch sources or access CRM, email, publishing, or private systems.");
   });
 
   it("explains a blocked result without manufacturing a diagnosis", () => {

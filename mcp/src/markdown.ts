@@ -1,7 +1,7 @@
 import type { BlockedDiagnosis, WorkingDiagnosis, WorkingDiagnosisV1 } from "./schema";
 
 const BOUNDARY =
-  "Uses the evidence you provide and lawful public sources. No CRM, email, publishing, or private-system access.";
+  "Presents evidence supplied by the host, which may include lawful public sources. The renderer does not fetch sources or access CRM, email, publishing, or private systems.";
 
 function escapeMarkdown(value: string): string {
   return value.replace(/([\\`*_{}\[\]()<>#+!|])/g, "\\$1");
@@ -47,6 +47,8 @@ function renderWorking(diagnosis: WorkingDiagnosis): string {
     "## Primary constraint",
     "",
     escapeMarkdown(diagnosis.primaryConstraint),
+    "",
+    `**Constraint evidence:** ${diagnosis.primaryConstraintEvidenceIds.map(escapeMarkdown).join(", ")}`,
     "",
     `**Confidence:** ${diagnosis.confidence}`,
     "",

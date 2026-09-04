@@ -34,7 +34,7 @@ Bring an unclear offer, a stalled brand, weak conversion, invisible search prese
 
 In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as a read-only Working Diagnosis case file. The interface shows the supplied problem, evidence and inferences, the primary constraint, the smallest useful route, and the human decision gate. A complete Markdown result remains available without the interface.
 
-8gnc cannot access private client systems, approve work, send email, publish, purchase, deploy, or change external state. The renderer does not perform research or determine whether a diagnosis is true; it validates and presents the structured result supplied by the host.
+8gnc cannot access private client systems, approve work, send email, publish, purchase, deploy, or change external state. The renderer does not perform research or determine whether a diagnosis is true; it schema-validates, normalizes, serializes, and presents the structured result supplied by the host.
 
 ### Starter prompts
 

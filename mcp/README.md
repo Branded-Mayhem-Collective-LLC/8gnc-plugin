@@ -20,9 +20,9 @@ or deploy anything.
 - Safety hints: read-only, non-destructive, closed-world
 
 Every factual evidence item in a working result requires a human-readable
-provenance label and an `asOf` date. Every inference must refer to existing
-evidence IDs. Missing evidence should be represented by the `blocked` variant,
-not fabricated.
+provenance label and an `asOf` date. The primary constraint and every inference
+must refer to existing evidence IDs. Missing evidence should be represented by
+the `blocked` variant, not fabricated.
 
 ## Local checks
 
