@@ -1,55 +1,66 @@
-# Public Beta Release Runbook
+# 8gnc 0.3.0 Release Runbook
 
-This runbook separates reversible release preparation from live publication.
+This runbook separates reversible release preparation from deployment and public publication. The v0.3 implementation pass does not itself authorize a commit, push, deployment, marketplace update, website switch, or announcement.
+
+## Release invariants
+
+- Exactly 37 skill folders remain unchanged in source count and provenance.
+- Claude Code remains skills-only: its marketplace entry uses `source: "./"`, `strict: false`, and `skills: "./plugins/8gnc/skills/"`, with no MCP declaration or root `.mcp.json`.
+- Codex/ChatGPT declare exactly one MCP server, `eightgnc`, at `https://mcp.8gnc.io/mcp`.
+- The server exposes exactly one read-only tool, `render_working_diagnosis`, and one UI resource, `ui://8gnc/working-diagnosis/v1.html`.
+- The renderer schema-validates, normalizes, serializes, and presents a caller-supplied diagnosis; it does not perform diagnosis, truth verification, or research.
+- The server has no authentication, storage, analytics, telemetry, cookies, outbound fetches, CRM, email, sending, publishing, deployment, or private-system access.
+- Structured content and the Markdown fallback carry the complete user-facing result. UI metadata is presentation-only.
 
 ## Preparation
 
-1. Validate both plugin manifests, both marketplace files, all 37 skills, provenance, licenses, and the skills-only boundary.
-2. Commit the final source tree on `codex/8gnc-public-beta`.
-3. Run `python3 scripts/package_release.py` from the clean commit.
-4. Verify the archive manifest and checksum and test the archive in clean Claude and Codex environments.
-5. Confirm the website policy, support, and product URLs are ready to deploy.
-6. Confirm the legacy successor notice points to the exact public repository and new product route.
+1. Confirm the source tree contains exactly 37 skills, the pinned `sources.lock.json`, licenses, and third-party notices.
+2. Run the bundle validator and the OpenAI plugin validator against `plugins/8gnc`.
+3. Run the skill validator against every skill folder.
+4. Run `npm --prefix mcp run check` on the registered remote execution plane.
+5. Run `claude plugin validate --strict .`; confirm the Claude marketplace entry exposes only `./plugins/8gnc/skills/`, the Claude manifest has no MCP declaration, and no `.mcp.json` exists at the repository root.
+6. Start a loopback-only Worker preview on the registered execution plane and test MCP initialization, tool discovery, resource discovery, valid working and blocked results, schema rejection, and the Markdown fallback.
+7. Inspect the rendered UI at desktop and mobile widths, with keyboard navigation and reduced motion.
+8. Verify the renderer performs no outbound request and uses no storage, cookie, analytics, telemetry, form submission, or browser persistence.
+9. Perform repository and history secret/privacy scans.
+10. Commit the final source tree only after implementation review.
+11. From that clean commit, run `python3 scripts/package_release.py`; compare the archive manifest with the distributable source tree and verify the checksum.
+12. Confirm the public privacy, terms, support, and product pages match the deployed behavior before any submission or promotion.
 
-## One-gate launch sequence
+## Deployment gate
 
-The exact approval phrase for these public actions is:
+A separate explicit approval is required before creating the public Worker, DNS route, or release deployment.
 
-`approve 8gnc public beta launch`
+After approval:
 
-After that approval:
+1. Deploy the exact reviewed Worker build to the staging environment.
+2. Re-run the MCP and UI tests against staging.
+3. Verify logging and retention configuration against `docs/PRIVACY.md` and `docs/DATA-FLOW.md`.
+4. Deploy the same reviewed revision to the production Worker.
+5. Create or verify the `mcp.8gnc.io` route and TLS.
+6. Test `https://mcp.8gnc.io/mcp` from an unauthenticated clean client.
 
-1. Merge the prepared plugin branch while the repository is private.
-2. Change `Branded-Mayhem-Collective-LLC/8gnc-plugin` to public.
-3. Verify unauthenticated access to the README, license, source, and policy links.
-4. Tag `v0.2.0` and publish the GitHub release with the OpenAI archive, file manifest, and checksum.
-5. Install and smoke-test the public GitHub source in clean Claude and Codex environments.
-6. Deploy the prepared website branch through the repository's production runbook and verify every public route and asset.
-7. Publish the `contraband-marketplace` successor notice.
-8. Submit the release to Claude Community and OpenAI review using `docs/SUBMISSION.md` and `docs/REVIEW-TESTS.md`.
+Do not merge or publish a plugin manifest that points users to an unavailable endpoint.
 
-Claude Community approval can make the reviewed plugin publicly discoverable after Anthropic's catalog sync. OpenAI review approval does not publish automatically.
+## Publication gate
 
-## Separate OpenAI publication gate
+A separate explicit approval is required before the v0.3 tag, GitHub release, directory update, website switch, or public announcement.
 
-After OpenAI approves the submission, publish it only after the exact phrase:
+After approval:
 
-`approve OpenAI 8gnc publish`
+1. Merge the reviewed source and tag `v0.3.0` without replacing existing tags or assets.
+2. Publish the deterministic OpenAI archive, file manifest, and checksum.
+3. Test clean Claude and Codex installs from the tag.
+4. Confirm Claude loads the 37 skills without the MCP server.
+5. Confirm Codex loads the same 37 skills and the single renderer.
+6. Submit or update the OpenAI directory entry with the exact reviewed release and policies.
+7. Keep Anthropic copy skills-only; do not imply that Claude runs the renderer.
+8. Update and verify the product page only after the public install works.
 
-## Local Codex migration
-
-After a clean public Codex install works, install `8gnc@8gnc` on this station and validate it in a fresh task. Only then remove `8gnc@8gnc-local` and the `8gnc-local` marketplace registration.
-
-## 90-day beta decision
-
-Track platform installation or activation data when the host exposes it, install-command clicks by platform, optional feedback, weekly support time, and qualified inquiries that explicitly cite 8gnc.
-
-Continue marketplace investment when the beta produces either 25 verified successful installations or completed diagnostic uses, or three qualified inquiries explicitly citing 8gnc, provided no high-severity issue remains unresolved and support stays at or below two hours per week.
-
-If neither signal appears, keep the open-source plugin available, pause MCP expansion and additional marketplace investment, and revisit discovery and positioning.
+Directory approval and publication remain separate platform actions. Do not describe review, approval, catalog placement, or timing as guaranteed.
 
 ## Rollback
 
-- Before directory approval, withdraw or amend the submission rather than publishing a known issue.
-- If the website deployment is defective, use the Cloudflare rollback procedure and keep the GitHub release available only if its package remains safe.
-- If the plugin package has a material defect, mark the release as affected, publish a patched semver release, and do not silently replace the tagged archive.
+- If the production endpoint is defective, withdraw the v0.3 directory update and use the Worker rollback procedure. Keep v0.2.1 installation instructions available.
+- If the package has a material defect, mark v0.3.0 as affected and publish a patched semver release; never silently replace a tagged archive.
+- If privacy behavior differs from the declaration, disable the endpoint, preserve evidence, correct the public policy, and complete security review before restoration.

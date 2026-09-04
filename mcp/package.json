@@ -1,0 +1,31 @@
+{
+  "name": "@8gnc/working-diagnosis-mcp",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "Stateless, read-only MCP renderer for the 8gnc Working Diagnosis interface.",
+  "scripts": {
+    "check": "npm run typecheck && npm test",
+    "cf-typegen": "wrangler types worker-configuration.d.ts --config wrangler.prd.toml --env-interface Env --include-runtime false",
+    "cf-typecheck": "wrangler types worker-configuration.d.ts --config wrangler.prd.toml --env-interface Env --include-runtime false --check",
+    "dev": "wrangler dev --config wrangler.toml",
+    "test": "vitest run",
+    "typecheck": "npm run cf-typecheck && tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "agents": "0.22.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260904.1",
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "22.20.1",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "vite": "8.2.2",
+    "vitest": "5.0.0",
+    "wrangler": "4.129.0"
+  }
+}

@@ -1,4 +1,7 @@
 dist/
+mcp/node_modules/
+mcp/.wrangler/
+mcp/coverage/
 __pycache__/
 *.pyc
 .DS_Store

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a deterministic, audited skills-only archive for OpenAI submission."""
+"""Build a deterministic, audited 8gnc OpenAI plugin archive."""
 
 from __future__ import annotations
 
@@ -16,9 +16,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 PLUGIN_ROOT = REPO_ROOT / "plugins" / "8gnc"
 CODEX_MANIFEST = PLUGIN_ROOT / ".codex-plugin" / "plugin.json"
 DIST_ROOT = REPO_ROOT / "dist"
+EXPECTED_MCP_CONFIG = {
+    "mcpServers": {"eightgnc": {"type": "http", "url": "https://mcp.8gnc.io/mcp"}}
+}
 EXPECTED_TOP_LEVEL = {
     ".claude-plugin",
     ".codex-plugin",
+    ".mcp.json",
     "LICENSE",
     "README.md",
     "THIRD_PARTY_NOTICES.md",
@@ -165,6 +169,12 @@ def main() -> int:
     version = manifest.get("version")
     if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", version):
         fail("Codex manifest version must be strict semver")
+
+    if manifest.get("mcpServers") != "./.mcp.json":
+        fail("Codex manifest must point mcpServers to ./.mcp.json")
+    mcp_config = json.loads((PLUGIN_ROOT / ".mcp.json").read_text(encoding="utf-8"))
+    if mcp_config != EXPECTED_MCP_CONFIG:
+        fail(".mcp.json does not match the exact approved 8gnc server declaration")
 
     files = collect_files()
     archive_path, entries = write_archive(files, version)

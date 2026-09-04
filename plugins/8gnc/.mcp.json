@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "eightgnc": {
+      "type": "http",
+      "url": "https://mcp.8gnc.io/mcp"
+    }
+  }
+}
