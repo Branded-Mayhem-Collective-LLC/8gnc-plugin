@@ -1,0 +1,70 @@
+{
+  "diagnosis": {
+    "schemaVersion": "1.0",
+    "status": "working",
+    "input": {
+      "summary": "Synthetic demo: a fictional independent studio is attracting qualified visitors, but too few reach the inquiry step."
+    },
+    "primaryConstraint": "The fictional offer creates interest without giving buyers one clear next decision.",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "id": "demo_choice_count",
+        "kind": "observed",
+        "statement": "The supplied demo page presents three equal-weight calls to action before it explains who the offer is for.",
+        "provenance": "Synthetic 8gnc gallery fixture; fabricated demonstration page review",
+        "asOf": "2026-09-04"
+      },
+      {
+        "id": "demo_inquiry_report",
+        "kind": "reported",
+        "statement": "The fictional founder reports that prospects often ask which service to choose before they will book.",
+        "provenance": "Synthetic 8gnc gallery fixture; fabricated demonstration intake note",
+        "asOf": "2026-09-04"
+      },
+      {
+        "id": "demo_funnel_table",
+        "kind": "observed",
+        "statement": "A supplied synthetic funnel table shows stable qualified visits and a drop between service-page views and inquiry starts.",
+        "provenance": "Synthetic 8gnc gallery fixture; fabricated demonstration funnel table",
+        "asOf": "2026-09-04"
+      }
+    ],
+    "inferences": [
+      {
+        "statement": "Choice overload is a stronger first hypothesis than insufficient awareness.",
+        "basedOnEvidenceIds": [
+          "demo_choice_count",
+          "demo_funnel_table"
+        ]
+      },
+      {
+        "statement": "Prospects may need a guided entry point before they can evaluate the service ladder.",
+        "basedOnEvidenceIds": [
+          "demo_choice_count",
+          "demo_inquiry_report"
+        ]
+      }
+    ],
+    "unknowns": [
+      "Do inquiry starts improve when qualified visitors receive one recommended next step?"
+    ],
+    "route": {
+      "steps": [
+        {
+          "method": "diagnose-brand-growth",
+          "purpose": "Confirm whether the decision path, not demand, is the binding constraint."
+        },
+        {
+          "method": "ux-ui-psych",
+          "purpose": "Reduce competing choices and make the recommended next step legible."
+        }
+      ],
+      "firstMove": "Test one guided entry point against the current three-choice page before adding traffic or new services."
+    },
+    "decisionGate": {
+      "required": true,
+      "question": "Do you want to test the guided entry point before investing in more acquisition?"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+name = "8gnc-working-diagnosis-mcp"
+main = "src/index.ts"
+compatibility_date = "2026-09-04"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+preview_urls = false
+routes = [{ pattern = "mcp.8gnc.io", custom_domain = true }]
+
+[observability]
+enabled = false
+
+[vars]
+MCP_ALLOWED_HOSTNAMES = "mcp.8gnc.io"
+MCP_ALLOWED_ORIGIN_HOSTNAMES = "chatgpt.com,chat.openai.com,platform.openai.com"

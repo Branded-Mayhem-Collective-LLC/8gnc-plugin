@@ -1,13 +1,13 @@
 # Marketplace Submission Packet
 
-Use this document as the canonical copy source for the Claude Community and OpenAI submissions for version 0.2.1.
+Use this document as the canonical copy source for a future 0.3.0 OpenAI update and the skills-only Claude listing. This is staged copy, not evidence that an endpoint is deployed or a submission has been filed.
 
 ## Identity
 
 - **Plugin name:** 8gnc — Brand Growth Diagnostic
 - **Technical identifier:** `8gnc`
 - **Developer:** Branded Mayhem Collective LLC
-- **Version:** 0.2.1
+- **Version:** 0.3.0
 - **Release stage:** Public Beta
 - **Category:** Productivity
 - **License:** MIT
@@ -32,7 +32,9 @@ Diagnose what is actually blocking growth, separate evidence from assumption, an
 
 Bring an unclear offer, a stalled brand, weak conversion, invisible search presence, or a sales motion that is not moving. 8gnc identifies one primary constraint, labels evidence and uncertainty, and routes the work into the smallest useful sequence across brand strategy, product strategy, content and voice, search and AI visibility, conversion, and sales practice.
 
-The plugin is a skills-only methodology package. It can work from evidence the user supplies, files made available by the host, and lawful public research. It does not connect to private client systems, approve work, publish, send, purchase, deploy, or change external state. Its output ends at a human decision gate.
+In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as a read-only Working Diagnosis case file. The interface shows the supplied problem, evidence and inferences, the primary constraint, the smallest useful route, and the human decision gate. A complete Markdown result remains available without the interface.
+
+8gnc cannot access private client systems, approve work, send email, publish, purchase, deploy, or change external state. The renderer does not perform research or determine whether a diagnosis is true; it validates and presents the structured result supplied by the host.
 
 ### Starter prompts
 
@@ -40,34 +42,42 @@ The plugin is a skills-only methodology package. It can work from evidence the u
 2. Pressure-test our positioning against the market and show me the evidence and the white space.
 3. Turn this product strategy into a decision-ready plan with risks, gaps, and next steps.
 
-## Implementation declaration
+## OpenAI implementation declaration
 
-- Submission type: **Skills only**
+- Submission type: **Skills plus MCP Apps UI**
 - Installed skill folders: **37**
-- MCP servers: **None**
-- Hooks: **None**
-- Authentication: **None operated by the publisher**
-- Publisher-operated data collection: **None from plugin use**
+- MCP servers: **One planned public HTTP endpoint**
+- Tools: **One — `render_working_diagnosis`**
+- UI resources: **One — `ui://8gnc/working-diagnosis/v1.html`**
+- Tool properties: **read-only, non-destructive, closed-world**
+- Authentication: **None**
+- Publisher-operated durable storage: **None**
+- Product analytics or telemetry: **None**
+- Outbound server fetches: **None**
 - Reviewer credentials: **Not required**
 
-Some optional specialists can use user-configured third-party research services in compatible local hosts. Those services are not required to test the diagnostic router, and their data handling is governed by their own terms.
+The endpoint is `https://mcp.8gnc.io/mcp`. Do not submit or attest that it is operational until production deployment and unauthenticated clean-client verification are complete.
+
+## Claude implementation declaration
+
+- Installed skill folders: **37**
+- MCP servers: **None declared in the Claude plugin**
+- Hooks: **None**
+- Publisher-operated data collection from skill use: **None**
+
+The Claude marketplace entry uses the repository as its source with `strict: false` and explicitly exposes only `./plugins/8gnc/skills/`. The nested Codex `.mcp.json` is not at repository root and is not declared as a Claude component. Do not load `plugins/8gnc` directly as a Claude plugin or imply that Claude runs the Working Diagnosis renderer in v0.3.
 
 ## Release notes
 
-Initial public-beta submission of 8gnc — Brand Growth Diagnostic. Version 0.2.1 packages the same diagnostic router and 36 specialist skills as 0.2.0 in a provider-neutral, skills-only bundle for Claude Code, ChatGPT, and Codex. This patch makes the two public SVG assets directory-compliant with square canvases; it does not change plugin behavior, skill content, permissions, or data handling.
+Version 0.3.0 preserves the 37-skill Brand Growth Diagnostic and adds one optional read-only Working Diagnosis renderer for compatible Codex and ChatGPT hosts. It returns the same evidence-backed result as structured content and complete Markdown, with an MCP Apps case-file interface when supported. Claude Code remains skills-only. The renderer is stateless, requires no account, makes no outbound request, and cannot access private systems or execute recommendations.
 
-## Claude submission
+## Submission checks
 
-Submit the repository through <https://platform.claude.com/plugins/submit>. The expected direct marketplace name is `8gnc`; Community approval will make the plugin installable as `8gnc@claude-community` after Anthropic's catalog sync. Do not describe the separate `claude-plugins-official` catalog as applied for or guaranteed.
+1. Verify the production endpoint and exact tool/resource inventory.
+2. Verify the public privacy, support, terms, and website pages match the deployed behavior.
+3. Upload `dist/8gnc-0.3.0-openai.zip` only from the clean reviewed commit.
+4. Compare the generated manifest, file manifest, and checksum with the tagged source.
+5. Run every case in `docs/REVIEW-TESTS.md` in a clean environment.
+6. Submit only after the required platform attestations are accurate for the deployed release.
 
-## OpenAI submission
-
-In the OpenAI plugin submission portal:
-
-1. Select **Create plugin** and **Skills only**.
-2. Upload `dist/8gnc-0.2.1-openai.zip`.
-3. Review the generated Codex manifest against the committed `.codex-plugin/plugin.json`.
-4. Use the identity, listing copy, URLs, prompts, release notes, availability, and test cases in this repository.
-5. Submit for review only after every scan and attestation matches the final release.
-
-OpenAI approval does not publish the plugin automatically. Publishing the approved version is a separate release action.
+Directory approval does not guarantee or automatically perform publication. Treat review, publication, and discoverability as separate platform-controlled states.

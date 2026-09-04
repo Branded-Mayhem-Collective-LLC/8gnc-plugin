@@ -4,9 +4,13 @@
 
 8gnc diagnoses what is actually blocking growth, separates evidence from assumption, and routes the work into the smallest useful method. Bring an unclear offer, a stalled brand, weak conversion, invisible search presence, or a sales motion that is not moving.
 
-This repository packages the same 37-skill, skills-only plugin for Claude Code, Codex, and the ChatGPT/Codex Plugins Directory.
+Version 0.3.0 keeps the exact 37-skill implementation and adds one optional, read-only Working Diagnosis renderer for compatible Codex and ChatGPT hosts. Claude Code remains skills-only.
 
-## Install
+## Release status
+
+The v0.3 implementation is staged in source. `https://mcp.8gnc.io/mcp` is the planned public endpoint and must not be described as available until deployment and clean-install verification are complete. The current tagged public release remains v0.2.1 until v0.3.0 is separately approved and published.
+
+## Install after v0.3.0 is released
 
 ### Claude Code
 
@@ -15,14 +19,16 @@ This repository packages the same 37-skill, skills-only plugin for Claude Code, 
 /plugin install 8gnc@8gnc
 ```
 
+Claude installs the 37 skills without the MCP renderer. The Claude marketplace entry deliberately uses the repository root as its source and exposes only `./plugins/8gnc/skills/`. Do not load `plugins/8gnc` directly as a Claude plugin: that nested directory also contains the Codex-only `.mcp.json` declaration.
+
 ### Codex
 
 ```bash
-codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.2.1
+codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.3.0
 codex plugin add 8gnc@8gnc
 ```
 
-The ChatGPT/Codex directory version will appear after platform review. The direct installs above use the public, MIT-licensed source in this repository.
+Codex installs the same skills plus the declared read-only renderer connection. ChatGPT directory availability remains subject to platform review.
 
 ## Start with a problem
 
@@ -39,33 +45,42 @@ The `diagnose-brand-growth` router names one primary constraint, marks what is o
 - 36 unique specialist skills adapted from six existing public 8gnc packages
 - one `diagnose-brand-growth` router
 - one shared `deep-research` engine
+- one Codex/ChatGPT MCP declaration for `render_working_diagnosis`
+- one MCP Apps UI resource at `ui://8gnc/working-diagnosis/v1.html`
 - pinned source provenance and original MIT notices
 - provider-neutral instructions and package-relative helpers
 
 The source packages historically counted `deep-research` in both Brandprint and Productprint. This bundle keeps one shared copy, producing 37 installed skill folders: 36 specialists plus the router.
 
-## Public beta boundary
+## What the renderer does
 
-Version 0.2.1 is skills-only. It has no MCP server, hooks, bundled or publisher-operated authenticated integrations, or background service.
+The 37 skills do the diagnostic work in the host. The remote renderer receives a caller-supplied `WorkingDiagnosisV1`, schema-validates and normalizes it, returns a complete Markdown fallback, and can present the same result as an interactive case file.
 
-The plugin can use evidence you provide, files the current host makes available, lawful public research, and locally configured credentials when a specialist explicitly supports them. It cannot independently access a CRM, client portal, approval system, private intelligence layer, or other private account.
+The renderer does not determine whether a diagnosis is true, decide how long evidence remains useful, perform research, fetch external URLs, or generate missing evidence. Missing provenance or a valid non-future as-of date must produce a blocked result or schema error rather than invented support.
+
+## Runtime boundary
+
+The renderer is stateless and has no authentication, database, durable storage, analytics, telemetry, cookies, browser persistence, or outbound network fetches. It has no CRM, email, approval-system, publishing, sending, purchase, deployment, or private-system access.
+
+The skills can use evidence you provide, files the current host makes available, lawful public research, and locally configured credentials when a specialist explicitly supports them. Those host-side capabilities are separate from the renderer.
 
 8gnc may draft and recommend. Approval of an artifact is not authorization to publish, deploy, send, purchase, or mutate an external system. Simulated audience reactions are not customer research, and speculative recommendations are not validated strategy.
-
-Some specialist outputs depend on host capabilities. DataForSEO workflows require a compatible local runtime and your own DataForSEO credentials. PDF rendering may require local Python dependencies. The diagnostic router and the rest of the methods remain usable without those optional integrations.
 
 ## Validate and package
 
 ```bash
 python3 plugins/8gnc/scripts/validate_bundle.py
+npm --prefix mcp run check
 claude plugin validate --strict .
 python3 scripts/package_release.py
 ```
 
-The packager requires a clean tracked tree, rejects unexpected or sensitive files, and writes a deterministic OpenAI upload archive plus its file manifest and SHA-256 checksum under `dist/`.
+The packager requires a clean tracked tree, rejects unexpected or sensitive files, and writes a deterministic OpenAI upload archive plus its file manifest and SHA-256 checksum under `dist/`. It packages the distributable plugin declaration, not the separately deployed Worker source.
 
 ## Policies and support
 
+- Data flow: [docs/DATA-FLOW.md](docs/DATA-FLOW.md)
+- Repository privacy declaration: [docs/PRIVACY.md](docs/PRIVACY.md)
 - Website: <https://8gnc.io/products/8gnc>
 - Privacy: <https://8gnc.io/products/8gnc/privacy>
 - Terms: <https://8gnc.io/products/8gnc/terms>

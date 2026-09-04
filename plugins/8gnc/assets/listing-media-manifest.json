@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "mcp/scripts/capture-gallery.mjs",
+  "browser": {
+    "source": "CHROME_BIN",
+    "version": "Google Chrome for Testing 151.0.7922.34",
+    "executableSha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71"
+  },
+  "viewport": {
+    "width": 1600,
+    "height": 1000,
+    "deviceScaleFactor": 1
+  },
+  "listingOrder": [
+    "input",
+    "diagnosis",
+    "route",
+    "fallback"
+  ],
+  "assets": [
+    {
+      "order": 1,
+      "view": "input",
+      "filename": "screenshot-input.png",
+      "dimensions": {
+        "width": 1600,
+        "height": 1000
+      },
+      "sha256": "c1065a61aaef10a85e42c370d652a28d3d7a9723a17cee613612fe0304ada192",
+      "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
+      "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
+    },
+    {
+      "order": 2,
+      "view": "diagnosis",
+      "filename": "screenshot-diagnosis.png",
+      "dimensions": {
+        "width": 1600,
+        "height": 1000
+      },
+      "sha256": "0b212a7bc4dddc12eb6494a7a6a8c4d3f6ce92eea87071f380b9378243bf135d",
+      "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
+      "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
+    },
+    {
+      "order": 3,
+      "view": "route",
+      "filename": "screenshot-route.png",
+      "dimensions": {
+        "width": 1600,
+        "height": 1000
+      },
+      "sha256": "7b127a80f1e4d08eb0760bdbe7793f6e8756babbf71a1cb4e71edb4a08cc38c3",
+      "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
+      "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
+    },
+    {
+      "order": 4,
+      "view": "fallback",
+      "filename": "screenshot-fallback.png",
+      "dimensions": {
+        "width": 1600,
+        "height": 1000
+      },
+      "sha256": "87b30ff106b7bc6ccdbe8d25a962b7f1d5495255774451bfd0b4c0aac1d266c0",
+      "sourceFixture": "mcp/fixtures/gallery-working-diagnosis.json",
+      "sourceUiPath": "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
+    }
+  ],
+  "futureUsage": {
+    "chatgptListing": "Use the four frames in this exact order: input, diagnosis, route, fallback.",
+    "website": "Use screenshot-diagnosis.png in the 8gnc hero; place input, route, and fallback below the fold in that order."
+  },
+  "contentBoundary": "Synthetic demonstration data only. These captures contain no private, client, CRM, or production-system data."
+}

@@ -1,6 +1,6 @@
 {
   "name": "8gnc",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Diagnose what is blocking brand growth, separate evidence from assumption, and route the work into the smallest useful 8gnc method.",
   "author": {
     "name": "Branded Mayhem Collective LLC",
@@ -19,16 +19,18 @@
     "sales"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "8gnc — Brand Growth Diagnostic",
     "shortDescription": "Find the constraint before you buy the tactic.",
-    "longDescription": "Bring an unclear offer, a stalled brand, weak conversion, invisible search presence, or a sales motion that is not moving. 8gnc names the primary constraint, separates evidence from inference, and routes the work into the smallest useful brand, product, content, visibility, conversion, or sales method.",
+    "longDescription": "Bring an unclear offer, a stalled brand, weak conversion, invisible search presence, or a sales motion that is not moving. 8gnc names the primary constraint, separates evidence from inference, routes the work into the smallest useful method, and can present the result in a read-only Working Diagnosis interface.",
     "developerName": "Branded Mayhem Collective LLC",
     "category": "Productivity",
     "capabilities": [
       "Research",
       "Strategy",
-      "Content generation"
+      "Content generation",
+      "Interactive"
     ],
     "websiteURL": "https://8gnc.io/products/8gnc",
     "privacyPolicyURL": "https://8gnc.io/products/8gnc/privacy",
@@ -40,6 +42,12 @@
     ],
     "brandColor": "#FF2E12",
     "composerIcon": "./assets/icon.svg",
-    "logo": "./assets/logo.svg"
+    "logo": "./assets/logo.svg",
+    "screenshots": [
+      "./assets/screenshot-input.png",
+      "./assets/screenshot-diagnosis.png",
+      "./assets/screenshot-route.png",
+      "./assets/screenshot-fallback.png"
+    ]
   }
 }
