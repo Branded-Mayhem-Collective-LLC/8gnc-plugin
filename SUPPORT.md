@@ -1,6 +1,6 @@
 # Support
 
-8gnc 0.3.0 is staged for public-beta review. Version 0.2.1 remains the current tagged release until v0.3 is separately published.
+8gnc 0.3.0 is the current public beta.
 
 ## Before opening an issue
 

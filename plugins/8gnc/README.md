@@ -27,9 +27,9 @@ The skills can use only evidence the user provides, files exposed by the current
 
 This plugin may draft and recommend. Approval of an artifact is not authorization to publish, deploy, send, purchase, or mutate an external system.
 
-## Staged endpoint
+## Public endpoint
 
-The Codex manifest points to `https://mcp.8gnc.io/mcp`, the planned public release endpoint. The v0.3 implementation is staged in source; the endpoint must not be described as available until deployment and clean-install verification are complete.
+The Codex manifest points to the live read-only renderer at `https://mcp.8gnc.io/mcp`. Directory availability remains subject to the host platform's review and publication state.
 
 ## Provenance and validation
 

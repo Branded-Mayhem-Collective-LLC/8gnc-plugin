@@ -2,7 +2,7 @@
 
 ## Supported version
 
-Security fixes are applied to the latest tagged public release. Version 0.2.1 remains the current public release until the staged 0.3.0 implementation is approved and published.
+Security fixes are applied to the latest tagged public release. Version 0.3.0 is the current supported public beta.
 
 ## Report a vulnerability
 

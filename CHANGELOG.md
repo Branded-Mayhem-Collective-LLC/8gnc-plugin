@@ -1,16 +1,16 @@
 # Changelog
 
-## 0.3.0 — Working Diagnosis interface (staged)
+## 0.3.0 — Working Diagnosis interface
 
 - Preserves the exact 37-skill implementation and pinned source provenance.
-- Adds one Codex/ChatGPT MCP declaration for the planned `https://mcp.8gnc.io/mcp` endpoint.
+- Adds one Codex/ChatGPT MCP declaration for the public `https://mcp.8gnc.io/mcp` endpoint.
 - Adds one read-only `render_working_diagnosis` tool and one MCP Apps resource for a Working Diagnosis case-file interface.
 - Keeps the text response complete when a host does not render the interface.
 - Keeps Claude Code skills-only with no MCP declaration.
 - Establishes a stateless boundary: no authentication, storage, analytics, telemetry, cookies, outbound fetches, CRM, email, sending, publishing, deployment, or private-system access.
 - Adds v0.3 privacy, data-flow, review, submission, and release documentation.
 
-This implementation is staged. The endpoint, release, directory update, and public availability require separate deployment, clean-install verification, and publication approval.
+The production endpoint and GitHub release are public. Directory availability remains controlled separately by each host platform.
 
 ## 0.2.1 — Directory asset compatibility
 

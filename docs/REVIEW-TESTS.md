@@ -1,6 +1,6 @@
 # Marketplace Review Tests
 
-These cases cover the staged 0.3.0 source in a clean host environment. No private account or paid credential is required.
+These cases cover the public 0.3.0 release in a clean host environment. No private account or paid credential is required.
 
 ## Skills and diagnostic behavior
 
