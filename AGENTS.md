@@ -8,7 +8,7 @@ This repository is the additive ChatGPT and Codex package for 8gnc. It must not 
 - Preserve exactly 37 skill folders. Do not fork or rewrite the six public source repositories.
 - Keep upstream adaptations inside this repository.
 - Preserve the original MIT notices under `third_party/`.
-- The approved v0.3 MCP surface is exactly one public, authentication-free, stateless renderer: `render_working_diagnosis`, with one MCP Apps resource at `ui://8gnc/working-diagnosis/v1.html`.
+- The approved v0.3 MCP surface is exactly one public, authentication-free, stateless renderer: `render_working_diagnosis`, with one MCP Apps resource at `ui://8gnc/working-diagnosis/v2.html`.
 - The renderer may validate, normalize, serialize, and present a caller-supplied diagnosis. It must not generate or validate the truth of a diagnosis, perform research, fetch external URLs, or change state.
 - Keep Claude skills-only. Do not add the MCP server, an app declaration, or hooks to the Claude manifest.
 - Preserve the Claude marketplace isolation contract: repository-root source, `strict: false`, explicit `./plugins/8gnc/skills/` exposure, and no repository-root `.mcp.json`. Do not document the nested Codex directory as a direct Claude plugin path.

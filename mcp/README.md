@@ -4,25 +4,31 @@ This package is the stateless presentation boundary for the 8gnc plugin. The
 37 packaged skills perform the diagnosis. This server accepts a completed
 `WorkingDiagnosisV1`, validates its shape and evidence references, and returns
 the same result as structured data, complete Markdown, and an optional MCP Apps
-interface.
+interface. A working result may contain one caller-supplied specialist artifact;
+each artifact item must refer to evidence in that same result.
 
 It does not fetch data, decide whether a diagnosis is correct, access private
 systems, identify a user, persist state, send email, write CRM records, publish,
 or deploy anything.
 
+The inline component can send a fixed, user-initiated follow-up prompt to the
+host conversation through `ui/message` when the user chooses to use or challenge
+the route. It does not call a server tool or execute the recommendation.
+
 ## Contract
 
 - Streamable HTTP route: `/mcp`
 - Tool: `render_working_diagnosis`
-- UI resource: `ui://8gnc/working-diagnosis/v1.html`
-- Input: `WorkingDiagnosisV1` with `working` and `blocked` variants
+- UI resource: `ui://8gnc/working-diagnosis/v2.html`
+- Input: `WorkingDiagnosisV1` with `working` and `blocked` variants and an optional artifact on working results only
 - Output: `{ diagnosis, markdown }`
 - Safety hints: read-only, non-destructive, closed-world
 
 Every factual evidence item in a working result requires a human-readable
-provenance label and an `asOf` date. The primary constraint and every inference
-must refer to existing evidence IDs. Missing evidence should be represented by
-the `blocked` variant, not fabricated.
+provenance label and an `asOf` date. The primary constraint, every inference,
+and every artifact item must refer to existing evidence IDs. The renderer
+presents but does not create or truth-verify the artifact. Missing evidence
+should be represented by the `blocked` variant, not fabricated.
 
 ## Local checks
 

@@ -9,8 +9,9 @@ This document describes the exact v0.3 Codex/ChatGPT renderer path. Claude Code 
 3. The host may call `render_working_diagnosis` with that complete structured result.
 4. The 8gnc MCP endpoint schema-validates and normalizes the supplied fields.
 5. The endpoint returns the normalized result as structured content and a complete Markdown fallback.
-6. A compatible host may render the same result with `ui://8gnc/working-diagnosis/v1.html`.
-7. The request ends. The renderer keeps no durable copy and makes no downstream call.
+6. A compatible host may render the same result with `ui://8gnc/working-diagnosis/v2.html`.
+7. The renderer request ends. The renderer keeps no durable copy and makes no downstream call.
+8. If the user explicitly selects **Use this route**, **Challenge it**, or **Add evidence in chat**, the component sends a fixed follow-up message to the host conversation through the MCP Apps `ui/message` bridge. This does not call the renderer again or execute an external action.
 
 ```text
 user evidence
@@ -24,24 +25,26 @@ render_working_diagnosis
     |
     +--> structured result
     +--> complete Markdown fallback
-    +--> optional read-only UI resource
+    +--> optional inline UI resource
+             |
+             +--> explicit user click --> host conversation only
 ```
 
 ## Data sent to the renderer
 
-The renderer receives only the fields in the tool call. Depending on the result state, those fields may include the user's problem summary, evidence statements, provenance labels, as-of dates, a primary constraint tied to evidence IDs, inferences tied to evidence IDs, unknowns, confidence, the smallest useful route, and a human decision gate.
+The renderer receives only the fields in the tool call. Depending on the result state, those fields may include the user's problem summary, evidence statements, provenance labels, as-of dates, a primary constraint tied to evidence IDs, inferences tied to evidence IDs, unknowns, confidence, the smallest useful route, an optional caller-supplied specialist artifact, and a human decision gate. Every artifact item must cite at least one evidence ID from the same working result. Blocked results cannot contain an artifact.
 
 Users and hosts should not place credentials, secrets, raw private exports, or unnecessary personal data in a diagnosis. Evidence can be summarized and redacted before the tool call.
 
 ## Validation is not truth verification
 
-The renderer checks the structure, real non-future as-of dates, and internal references of the supplied object. It does not independently verify the accuracy of a statement, determine how long evidence remains useful, browse a cited URL, contact a source, generate research, or certify a recommendation. Missing provenance or a valid as-of date must be represented as blocked or rejected, not silently filled.
+The renderer checks the structure, real non-future as-of dates, and internal references of the supplied object. This includes validating artifact evidence references and rejecting duplicate artifact labels. It does not independently verify the accuracy of a statement, determine how long evidence remains useful, browse a cited URL, contact a source, create the artifact, generate research, or certify a recommendation. Missing provenance or a valid as-of date must be represented as blocked or rejected, not silently filled.
 
 ## No downstream systems
 
 The renderer has no authentication, database, durable object, KV namespace, queue, analytics service, telemetry collector, CRM, email provider, approval system, publishing system, deployment system, or private client integration. It performs no outbound fetches.
 
-The UI uses no form submission, cookie, local storage, session storage, tracking pixel, analytics script, or external asset request.
+The UI uses no form submission, cookie, local storage, session storage, tracking pixel, analytics script, external asset request, or `tools/call` request. Its only outbound UI action is an explicit user-initiated `ui/message` to the host conversation.
 
 ## Retention
 

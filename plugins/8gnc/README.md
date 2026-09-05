@@ -10,11 +10,11 @@ Claude's documented install uses the repository-root marketplace entry, which ex
 
 Start with the problem. `diagnose-brand-growth` names the primary constraint, distinguishes evidence from inference, and routes the work into the smallest useful sequence across brand, product, content, visibility, conversion, and sales.
 
-In a compatible Codex or ChatGPT host, `render_working_diagnosis` can present the completed result as a compact interactive case file. The text response remains complete when the host cannot display the interface.
+In a compatible Codex or ChatGPT host, `render_working_diagnosis` can present the completed result as a focused inline diagnosis. It leads with one constraint and one first move, while evidence, inference, uncertainty, and an optional caller-supplied specialist output remain available through expandable sections. Explicit buttons can ask the host conversation to use or challenge the route; they do not execute it. The text response remains complete when the host cannot display the interface.
 
 ## Runtime boundary
 
-The 37 skills do the diagnostic work in the host. The remote renderer only schema-validates, normalizes, serializes, and presents a diagnosis already supplied in the tool call. It does not decide whether the diagnosis is true and it does not perform research.
+The 37 skills do the diagnostic work in the host. The remote renderer only schema-validates, normalizes, serializes, and presents a diagnosis and optional specialist artifact already supplied in the tool call. It does not decide whether the diagnosis or artifact is true, create the artifact, or perform research.
 
 The renderer is stateless and has:
 

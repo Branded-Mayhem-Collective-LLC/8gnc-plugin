@@ -1,0 +1,74 @@
+{
+  "artifact": "8gnc-v0.3-listing-v3",
+  "status": "review-draft-only",
+  "supersedes": [
+    "8gnc-v0.3-gallery",
+    "8gnc-v0.3-gallery-v2"
+  ],
+  "publicationAuthorized": false,
+  "referenceMeasurement": {
+    "width": 706,
+    "height": 722,
+    "format": "png",
+    "aspectRatio": 0.97784,
+    "alphaChannel": "present-but-fully-opaque",
+    "alphaRange": [255, 255],
+    "inference": "The listing's surrounding background and framing are presentation-layer chrome, not embedded source-image pixels."
+  },
+  "listingImage": {
+    "width": 706,
+    "height": 722,
+    "cropFromCanonical": { "x": 449, "y": 0, "width": 706, "height": 722 },
+    "background": "opaque white interface canvas",
+    "embeddedPrompt": false,
+    "embeddedGradient": false,
+    "generatedPixels": false
+  },
+  "disclosure": "Illustrative product walkthrough; not customer results.",
+  "cards": [
+    {
+      "index": 1,
+      "state": "diagnosis",
+      "source": { "file": "sources/canonical-screenshot-diagnosis.png", "sha256": "a2113e223b7de75baa19a673a4304146c122fb78038711c8a85de80c2e6e5213" },
+      "listingPrompt": "Our homepage creates interest, but buyers still don’t know what to do next. What’s the constraint?",
+      "caption": "One working constraint. One first move. Confidence shown.",
+      "alt": "8gnc working brand-growth diagnosis with medium confidence and a recommended first move.",
+      "png": { "file": "png/8gnc-listing-01-diagnosis.png", "sha256": "e4b62de71db9df14359de8972b94d9b7f954630937fe734cb6edb7669307fce1" },
+      "webp": { "file": "webp/8gnc-listing-01-diagnosis.webp", "sha256": "95939c498aaac4aaf49492b872ef786896384a94a12b731b65013499e4ffc476" }
+    },
+    {
+      "index": 2,
+      "state": "evidence",
+      "source": { "file": "sources/canonical-screenshot-evidence.png", "sha256": "816a04c57d5e47f6e26e35ef57ee627f24bdd7e2a4ea07e31975f2068c11bb72" },
+      "listingPrompt": "Show me what supports that diagnosis—and what could change the call.",
+      "caption": "Evidence stays separate from inference, with the unknown left visible.",
+      "alt": "8gnc evidence view separating observed sources, inference, and what remains unknown.",
+      "png": { "file": "png/8gnc-listing-02-evidence.png", "sha256": "db00f1eaec8860c87ab298b02a7d74413c58ec71765a6a1af1713f2f02a7fb74" },
+      "webp": { "file": "webp/8gnc-listing-02-evidence.webp", "sha256": "8c84ec9afadfd0fe5c9f76c5ed39acabda223d6c5bc6262add49a4a8dc102720" }
+    },
+    {
+      "index": 3,
+      "state": "output",
+      "source": { "file": "sources/canonical-screenshot-output.png", "sha256": "6b438501dd88b00e01edc99bfe4cf82e97250bfb405e36c5ddc34a57a822b9bf" },
+      "listingPrompt": "Turn the diagnosis into a decision-ready homepage map.",
+      "caption": "A supplied artifact stays attached to the diagnosis and decision.",
+      "alt": "8gnc decision-ready homepage map organized around the first call to action and supporting proof.",
+      "png": { "file": "png/8gnc-listing-03-output.png", "sha256": "231118ed6719e148face3c73803fde966b9005b83a11a17f39d4f11f09f1fce6" },
+      "webp": { "file": "webp/8gnc-listing-03-output.webp", "sha256": "557a3407282ecfcb8827cfaf52688f792b9f7b9fd99615d3ae22b9417f5eec09" }
+    },
+    {
+      "index": 4,
+      "state": "blocked",
+      "source": { "file": "sources/canonical-screenshot-blocked.png", "sha256": "d068f39e433fdd27deabd34031fe572f9694350d1250fab060268ca62762b22d" },
+      "listingPrompt": "We don’t have current evidence. Name the growth constraint anyway.",
+      "caption": "If the evidence is not there, 8gnc stops before the guess.",
+      "alt": "8gnc evidence-required state that pauses the diagnosis instead of guessing.",
+      "png": { "file": "png/8gnc-listing-04-blocked.png", "sha256": "0661697a216cfc02758ab8cf760cd8c0c5eccfa216834daea665d8d6d86cf0fb" },
+      "webp": { "file": "webp/8gnc-listing-04-blocked.webp", "sha256": "459e1a3e601b12abfcac613e4e06270f75b88933ec50175fcb1a41605a925639" }
+    }
+  ],
+  "proof": {
+    "file": "proof/8gnc-listing-706x722-contact-sheet.png",
+    "sha256": "cb5bb49ea26ad08d6acf5e107112e0b2b0e7b0ca5414e3ab806e7d212169ca27"
+  }
+}

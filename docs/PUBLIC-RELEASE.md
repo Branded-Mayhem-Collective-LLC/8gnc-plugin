@@ -7,10 +7,10 @@ This runbook separates reversible release preparation from deployment and public
 - Exactly 37 skill folders remain unchanged in source count and provenance.
 - Claude Code remains skills-only: its marketplace entry uses `source: "./"`, `strict: false`, and `skills: "./plugins/8gnc/skills/"`, with no MCP declaration or root `.mcp.json`.
 - Codex/ChatGPT declare exactly one MCP server, `eightgnc`, at `https://mcp.8gnc.io/mcp`.
-- The server exposes exactly one read-only tool, `render_working_diagnosis`, and one UI resource, `ui://8gnc/working-diagnosis/v1.html`.
-- The renderer schema-validates, normalizes, serializes, and presents a caller-supplied diagnosis; it does not perform diagnosis, truth verification, or research.
+- The server exposes exactly one read-only tool, `render_working_diagnosis`, and one UI resource, `ui://8gnc/working-diagnosis/v2.html`.
+- The renderer schema-validates, normalizes, serializes, and presents a caller-supplied diagnosis and optional evidence-linked specialist artifact; it does not perform diagnosis, create the artifact, truth-verify claims, or perform research.
 - The server has no authentication, storage, analytics, telemetry, cookies, outbound fetches, CRM, email, sending, publishing, deployment, or private-system access.
-- Structured content and the Markdown fallback carry the complete user-facing result. UI metadata is presentation-only.
+- Structured content and the Markdown fallback carry the complete user-facing result, including the artifact when supplied. UI metadata is presentation-only.
 
 ## Preparation
 
@@ -19,7 +19,7 @@ This runbook separates reversible release preparation from deployment and public
 3. Run the skill validator against every skill folder.
 4. Run `npm --prefix mcp run check` on the registered remote execution plane.
 5. Run `claude plugin validate --strict .`; confirm the Claude marketplace entry exposes only `./plugins/8gnc/skills/`, the Claude manifest has no MCP declaration, and no `.mcp.json` exists at the repository root.
-6. Start a loopback-only Worker preview on the registered execution plane and test MCP initialization, tool discovery, resource discovery, valid working and blocked results, schema rejection, and the Markdown fallback.
+6. Start a loopback-only Worker preview on the registered execution plane and test MCP initialization, tool discovery, resource discovery, valid working and blocked results, artifact evidence-reference validation, schema rejection, and the Markdown fallback.
 7. Inspect the rendered UI at desktop and mobile widths, with keyboard navigation and reduced motion.
 8. Verify the renderer performs no outbound request and uses no storage, cookie, analytics, telemetry, form submission, or browser persistence.
 9. Perform repository and history secret/privacy scans.

@@ -4,7 +4,9 @@
 
 - Preserves the exact 37-skill implementation and pinned source provenance.
 - Adds one Codex/ChatGPT MCP declaration for the public `https://mcp.8gnc.io/mcp` endpoint.
-- Adds one read-only `render_working_diagnosis` tool and one MCP Apps resource for a Working Diagnosis case-file interface.
+- Adds one read-only `render_working_diagnosis` tool and one MCP Apps resource for a focused inline Working Diagnosis.
+- Adds an optional caller-supplied, evidence-linked specialist artifact and a four-frame gallery showing the diagnosis, supporting evidence, supplied output, and the evidence-required state.
+- Uses the shared 8gnc React component library for the card, badges, buttons, separator, and disclosure controls, with only a thin token-driven brand layer.
 - Keeps the text response complete when a host does not render the interface.
 - Keeps Claude Code skills-only with no MCP declaration.
 - Establishes a stateless boundary: no authentication, storage, analytics, telemetry, cookies, outbound fetches, CRM, email, sending, publishing, deployment, or private-system access.

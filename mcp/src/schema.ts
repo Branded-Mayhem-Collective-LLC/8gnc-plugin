@@ -100,6 +100,26 @@ export const RouteStepSchema = z
   })
   .strict();
 
+export const ArtifactItemSchema = z
+  .object({
+    label: text("artifact.items[].label", 120),
+    detail: text("artifact.items[].detail", 1_200),
+    basedOnEvidenceIds: z
+      .array(z.string().trim().min(1))
+      .min(1, "each artifact item must cite at least one evidence id")
+      .max(12)
+  })
+  .strict();
+
+export const ArtifactSchema = z
+  .object({
+    title: text("artifact.title", 240),
+    method: z.enum(ROUTE_METHODS),
+    summary: text("artifact.summary", 1_600),
+    items: z.array(ArtifactItemSchema).min(3).max(5)
+  })
+  .strict();
+
 export const WorkingDiagnosisSchema = z
   .object({
     schemaVersion: z.literal(WORKING_DIAGNOSIS_SCHEMA_VERSION),
@@ -120,6 +140,7 @@ export const WorkingDiagnosisSchema = z
         firstMove: text("route.firstMove", 1_600)
       })
       .strict(),
+    artifact: ArtifactSchema.optional(),
     decisionGate: DecisionGateSchema
   })
   .strict()
@@ -175,6 +196,42 @@ export const WorkingDiagnosisSchema = z
             message: `unknown evidence reference: ${evidenceId}`,
             path: ["inferences", inferenceIndex, "basedOnEvidenceIds", referenceIndex]
           });
+        }
+      }
+    }
+
+    if (diagnosis.artifact) {
+      const artifactLabels = new Set<string>();
+
+      for (const [itemIndex, item] of diagnosis.artifact.items.entries()) {
+        const normalizedLabel = item.label.toLowerCase();
+        if (artifactLabels.has(normalizedLabel)) {
+          context.addIssue({
+            code: "custom",
+            message: `duplicate artifact item label: ${item.label}`,
+            path: ["artifact", "items", itemIndex, "label"]
+          });
+        }
+        artifactLabels.add(normalizedLabel);
+
+        const referencedIds = new Set<string>();
+        for (const [referenceIndex, evidenceId] of item.basedOnEvidenceIds.entries()) {
+          if (referencedIds.has(evidenceId)) {
+            context.addIssue({
+              code: "custom",
+              message: `duplicate artifact evidence reference: ${evidenceId}`,
+              path: ["artifact", "items", itemIndex, "basedOnEvidenceIds", referenceIndex]
+            });
+          }
+          referencedIds.add(evidenceId);
+
+          if (!evidenceIds.has(evidenceId)) {
+            context.addIssue({
+              code: "custom",
+              message: `unknown artifact evidence reference: ${evidenceId}`,
+              path: ["artifact", "items", itemIndex, "basedOnEvidenceIds", referenceIndex]
+            });
+          }
         }
       }
     }
