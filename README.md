@@ -8,7 +8,7 @@ Version 0.3.0 keeps the exact 37-skill implementation and adds one optional, rea
 
 ## Release status
 
-Version 0.3.0 is the current release candidate. The latest tagged public beta remains `v0.2.1`. The endpoint at `https://mcp.8gnc.io/mcp` is reachable, but the v0.3 `v2.html` interface still requires an approved deployment and clean-client verification before the tag or directory update.
+Version 0.3.0 is the current public beta. The read-only renderer is deployed at `https://mcp.8gnc.io/mcp`, and the v0.3 `v2.html` interface has passed clean-client verification on both the staging and production Workers.
 
 ## Install
 
@@ -24,11 +24,11 @@ Claude installs the 37 skills without the MCP renderer. The Claude marketplace e
 ### Codex
 
 ```bash
-codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.2.1
+codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.3.0
 codex plugin add 8gnc@8gnc
 ```
 
-This is the current tagged public install. After the release owner publishes and verifies `v0.3.0`, the same command may be pinned to `--ref v0.3.0`. Codex v0.3 installs the same skills plus the declared read-only renderer connection. ChatGPT directory availability remains subject to platform review.
+Codex installs the same 37 skills plus the declared read-only renderer connection. ChatGPT directory availability remains subject to platform review.
 
 ## Start with a problem
 
