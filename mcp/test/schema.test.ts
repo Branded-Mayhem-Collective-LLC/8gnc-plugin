@@ -43,6 +43,28 @@ const workingDiagnosis = () => ({
     ],
     firstMove: "Review the offer page against three recent qualified prospect questions."
   },
+  artifact: {
+    title: "Homepage decision map",
+    method: "ux-ui-psych" as const,
+    summary: "One guided entry point and the proof that belongs around it.",
+    items: [
+      {
+        label: "Before the first CTA",
+        detail: "Show one buyer problem and one recommended offer.",
+        basedOnEvidenceIds: ["analytics-aug", "owner-report"]
+      },
+      {
+        label: "After the first CTA",
+        detail: "Ask fit questions, explain the engagement, then offer booking.",
+        basedOnEvidenceIds: ["owner-report"]
+      },
+      {
+        label: "Work to hold",
+        detail: "Hold acquisition expansion until the first choice is tested.",
+        basedOnEvidenceIds: ["analytics-aug"]
+      }
+    ]
+  },
   decisionGate: {
     required: true as const,
     question: "Do you want to test offer clarity before buying more traffic?"
@@ -121,5 +143,39 @@ describe("WorkingDiagnosisV1Schema", () => {
       }
     };
     expect(WorkingDiagnosisV1Schema.safeParse(invented).success).toBe(false);
+  });
+
+  it("requires evidence-linked artifact items with unique labels", () => {
+    const unknownEvidence = workingDiagnosis();
+    unknownEvidence.artifact.items[0]!.basedOnEvidenceIds = ["not-supplied"];
+    expect(WorkingDiagnosisV1Schema.safeParse(unknownEvidence).success).toBe(false);
+
+    const duplicateLabel = workingDiagnosis();
+    duplicateLabel.artifact.items[1]!.label = "before the first cta";
+    expect(WorkingDiagnosisV1Schema.safeParse(duplicateLabel).success).toBe(false);
+
+    const duplicateReference = workingDiagnosis();
+    duplicateReference.artifact.items[0]!.basedOnEvidenceIds = [
+      "analytics-aug",
+      "analytics-aug"
+    ];
+    expect(WorkingDiagnosisV1Schema.safeParse(duplicateReference).success).toBe(false);
+  });
+
+  it("does not permit artifacts on blocked results", () => {
+    const result = WorkingDiagnosisV1Schema.safeParse({
+      schemaVersion: "1.0",
+      status: "blocked",
+      input: { summary: "We think search visibility is weak." },
+      reason: "No dated search evidence was supplied.",
+      missingEvidence: ["A dated search performance export."],
+      artifact: workingDiagnosis().artifact,
+      decisionGate: {
+        required: true,
+        question: "Can you provide dated search evidence?"
+      }
+    });
+
+    expect(result.success).toBe(false);
   });
 });

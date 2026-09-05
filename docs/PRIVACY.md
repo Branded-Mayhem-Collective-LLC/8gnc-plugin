@@ -8,7 +8,9 @@ The Claude marketplace entry exposes only the 37 local skills. Its source is the
 
 ## Codex and ChatGPT renderer
 
-Compatible Codex and ChatGPT hosts may send a caller-supplied `WorkingDiagnosisV1` object to the public 8gnc MCP endpoint at <https://mcp.8gnc.io/mcp>. The service uses the object only to schema-validate, normalize, serialize, and present the same working diagnosis during that request.
+Compatible Codex and ChatGPT hosts may send a caller-supplied `WorkingDiagnosisV1` object to the public 8gnc MCP endpoint at <https://mcp.8gnc.io/mcp>. A working result may include an optional evidence-linked specialist artifact supplied in the same request. The service uses the object only to schema-validate, normalize, serialize, and present the same working diagnosis and artifact during that request.
+
+The inline component offers explicit **Use this route**, **Challenge it**, and **Add evidence in chat** controls. Selecting one sends a fixed user message to the host conversation through the standard MCP Apps bridge. The message is not sent to Branded Mayhem, does not call the renderer, and cannot execute or authorize an external action.
 
 The renderer code does not:
 

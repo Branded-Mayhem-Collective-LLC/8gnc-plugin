@@ -35,6 +35,24 @@ function renderWorking(diagnosis: WorkingDiagnosis): string {
     )
     .join("\n");
 
+  const artifact = diagnosis.artifact
+    ? [
+        "## Specialist artifact",
+        "",
+        `### ${escapeMarkdown(diagnosis.artifact.title)}`,
+        "",
+        `**Method:** \`${diagnosis.artifact.method}\``,
+        "",
+        escapeMarkdown(diagnosis.artifact.summary),
+        "",
+        ...diagnosis.artifact.items.map(
+          (item) =>
+            `- **${escapeMarkdown(item.label)}:** ${escapeMarkdown(item.detail)} _(based on: ${item.basedOnEvidenceIds.map(escapeMarkdown).join(", ")})_`
+        ),
+        ""
+      ]
+    : [];
+
   return [
     "# Working Diagnosis",
     "",
@@ -70,6 +88,7 @@ function renderWorking(diagnosis: WorkingDiagnosis): string {
     "",
     `**First move:** ${escapeMarkdown(diagnosis.route.firstMove)}`,
     "",
+    ...artifact,
     "## Decision gate",
     "",
     escapeMarkdown(diagnosis.decisionGate.question),

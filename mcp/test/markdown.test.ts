@@ -32,6 +32,28 @@ describe("renderWorkingDiagnosisMarkdown", () => {
         steps: [{ method: "ux-ui-psych", purpose: "Make the decision legible." }],
         firstMove: "Add the three scope boundaries prospects ask about most."
       },
+      artifact: {
+        title: "Homepage decision map",
+        method: "ux-ui-psych",
+        summary: "One guided entry point and the proof that belongs around it.",
+        items: [
+          {
+            label: "Before the first CTA",
+            detail: "Show one buyer problem and one recommended offer.",
+            basedOnEvidenceIds: ["page-review"]
+          },
+          {
+            label: "After the first CTA",
+            detail: "Explain fit and the engagement before booking.",
+            basedOnEvidenceIds: ["page-review"]
+          },
+          {
+            label: "Work to hold",
+            detail: "Hold acquisition expansion until the choice is tested.",
+            basedOnEvidenceIds: ["page-review"]
+          }
+        ]
+      },
       decisionGate: {
         required: true,
         question: "Do you want to test this before changing acquisition?"
@@ -45,6 +67,10 @@ describe("renderWorkingDiagnosisMarkdown", () => {
     expect(markdown).toContain("Owner-supplied page capture.");
     expect(markdown).toContain("## Smallest useful route");
     expect(markdown).toContain("`ux-ui-psych`");
+    expect(markdown).toContain("## Specialist artifact");
+    expect(markdown).toContain("### Homepage decision map");
+    expect(markdown).toContain("**Before the first CTA:**");
+    expect(markdown).toContain("_(based on: page-review)_");
     expect(markdown).toContain("The renderer does not fetch sources or access CRM, email, publishing, or private systems.");
   });
 

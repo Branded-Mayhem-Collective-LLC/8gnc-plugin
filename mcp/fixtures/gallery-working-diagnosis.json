@@ -3,9 +3,9 @@
     "schemaVersion": "1.0",
     "status": "working",
     "input": {
-      "summary": "Synthetic demo: a fictional independent studio is attracting qualified visitors, but too few reach the inquiry step."
+      "summary": "Synthetic example: an independent studio is attracting qualified visitors, but too few reach the inquiry step."
     },
-    "primaryConstraint": "The fictional offer creates interest without giving buyers one clear next decision.",
+    "primaryConstraint": "The offer creates interest without giving buyers one clear next decision.",
     "primaryConstraintEvidenceIds": [
       "demo_choice_count",
       "demo_inquiry_report",
@@ -23,7 +23,7 @@
       {
         "id": "demo_inquiry_report",
         "kind": "reported",
-        "statement": "The fictional founder reports that prospects often ask which service to choose before they will book.",
+        "statement": "The founder reports that prospects often ask which service to choose before they will book.",
         "provenance": "Synthetic 8gnc gallery fixture; fabricated demonstration intake note",
         "asOf": "2026-09-04"
       },
@@ -67,9 +67,48 @@
       ],
       "firstMove": "Test one guided entry point against the current three-choice page before adding traffic or new services."
     },
+    "artifact": {
+      "title": "Homepage decision map",
+      "method": "ux-ui-psych",
+      "summary": "One guided entry point, the proof that belongs around it, and the work to hold until the choice is clear.",
+      "items": [
+        {
+          "label": "Before the first CTA",
+          "detail": "One buyer problem, one recommended offer, and one proof point tied to that choice.",
+          "basedOnEvidenceIds": [
+            "demo_choice_count",
+            "demo_inquiry_report"
+          ]
+        },
+        {
+          "label": "After the first CTA",
+          "detail": "Fit questions, how the engagement works, then booking.",
+          "basedOnEvidenceIds": [
+            "demo_inquiry_report"
+          ]
+        },
+        {
+          "label": "Proof to keep",
+          "detail": "The supplied synthetic page review, intake note, and funnel table that support a guided entry point.",
+          "basedOnEvidenceIds": [
+            "demo_choice_count",
+            "demo_inquiry_report",
+            "demo_funnel_table"
+          ]
+        },
+        {
+          "label": "Work to hold",
+          "detail": "Channel expansion and new campaign concepts until the first choice is tested.",
+          "basedOnEvidenceIds": [
+            "demo_choice_count",
+            "demo_funnel_table"
+          ]
+        }
+      ]
+    },
     "decisionGate": {
       "required": true,
-      "question": "Do you want to test the guided entry point before investing in more acquisition?"
+      "question": "Do you want to test one guided homepage entry point before investing in more acquisition?"
     }
   }
 }

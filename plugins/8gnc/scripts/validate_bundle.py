@@ -27,13 +27,17 @@ EXPECTED_NAME = "8gnc"
 EXPECTED_VERSION = "0.3.0"
 EXPECTED_DISPLAY_NAME = "8gnc — Brand Growth Diagnostic"
 EXPECTED_SCREENSHOTS = [
-    "./assets/screenshot-input.png",
-    "./assets/screenshot-diagnosis.png",
-    "./assets/screenshot-route.png",
-    "./assets/screenshot-fallback.png",
+    "./assets/listing/8gnc-listing-01-diagnosis.png",
+    "./assets/listing/8gnc-listing-02-evidence.png",
+    "./assets/listing/8gnc-listing-03-output.png",
+    "./assets/listing/8gnc-listing-04-blocked.png",
 ]
-EXPECTED_SCREENSHOT_VIEWS = ["input", "diagnosis", "route", "fallback"]
-EXPECTED_SCREENSHOT_SIZE = {"width": 1600, "height": 1000}
+EXPECTED_SCREENSHOT_VIEWS = ["diagnosis", "evidence", "output", "blocked"]
+EXPECTED_SCREENSHOT_SIZE = {"width": 706, "height": 722}
+EXPECTED_LISTING_SOURCE_MANIFEST = "listing/source-manifest.json"
+EXPECTED_LISTING_SOURCE_MANIFEST_SHA256 = (
+    "c7798514d56078e1db34e5a8ad431e4e16a8f32a50c899b74415266d13aced8d"
+)
 EXPECTED_MCP_CONFIG = {
     "mcpServers": {"eightgnc": {"type": "http", "url": "https://mcp.8gnc.io/mcp"}}
 }
@@ -218,24 +222,59 @@ def validate_listing_media(errors: list[str], manifest: dict[str, Any]) -> None:
         fail(errors, "listing media manifest schemaVersion must be 1")
     if manifest.get("listingOrder") != EXPECTED_SCREENSHOT_VIEWS:
         fail(errors, f"listing media order must be {EXPECTED_SCREENSHOT_VIEWS!r}")
+    if manifest.get("publicationAuthorized") is not True:
+        fail(errors, "listing media must record the release owner's publication authorization")
+    if manifest.get("sourceManifest") != EXPECTED_LISTING_SOURCE_MANIFEST:
+        fail(errors, f"listing source manifest must be {EXPECTED_LISTING_SOURCE_MANIFEST!r}")
+    if manifest.get("sourceManifestSha256") != EXPECTED_LISTING_SOURCE_MANIFEST_SHA256:
+        fail(errors, "listing source manifest checksum declaration is incorrect")
+    if manifest.get("mediaPresentation") != {
+        "nativeImageOnly": True,
+        "listingPromptPlacement": "separate-presentation-layer",
+        "embeddedPrompt": False,
+        "embeddedGradient": False,
+        "embeddedGalleryChrome": False,
+    }:
+        fail(errors, "listing media presentation contract is incorrect")
+
+    source_manifest_path = PLUGIN_ROOT / "assets" / EXPECTED_LISTING_SOURCE_MANIFEST
+    if not source_manifest_path.is_file():
+        fail(errors, "missing BMC Creative Studio v3 source manifest")
+        source_manifest: dict[str, Any] = {}
+    else:
+        source_manifest_data = source_manifest_path.read_bytes()
+        if hashlib.sha256(source_manifest_data).hexdigest() != EXPECTED_LISTING_SOURCE_MANIFEST_SHA256:
+            fail(errors, "BMC Creative Studio v3 source manifest checksum mismatch")
+        try:
+            source_manifest = json.loads(source_manifest_data)
+        except json.JSONDecodeError as error:
+            fail(errors, f"invalid BMC Creative Studio v3 source manifest: {error}")
+            source_manifest = {}
+
+    source_cards = source_manifest.get("cards")
+    if not isinstance(source_cards, list) or len(source_cards) != len(EXPECTED_SCREENSHOTS):
+        fail(errors, "BMC Creative Studio v3 source manifest must contain exactly four cards")
+        source_cards = [{} for _ in EXPECTED_SCREENSHOTS]
 
     assets = manifest.get("assets")
     if not isinstance(assets, list) or len(assets) != len(EXPECTED_SCREENSHOTS):
         fail(errors, "listing media manifest must contain exactly four assets")
         return
 
-    for index, (asset, declared_path, view) in enumerate(
-        zip(assets, EXPECTED_SCREENSHOTS, EXPECTED_SCREENSHOT_VIEWS, strict=True), start=1
+    for index, (asset, source_card, declared_path, view) in enumerate(
+        zip(assets, source_cards, EXPECTED_SCREENSHOTS, EXPECTED_SCREENSHOT_VIEWS, strict=True), start=1
     ):
         if not isinstance(asset, dict):
             fail(errors, f"listing media asset {index} must be an object")
             continue
-        expected_filename = Path(declared_path).name
         expected_fields = {
             "order": index,
             "view": view,
-            "filename": expected_filename,
+            "filename": declared_path.removeprefix("./assets/"),
             "dimensions": EXPECTED_SCREENSHOT_SIZE,
+            "listingPrompt": source_card.get("listingPrompt"),
+            "caption": source_card.get("caption"),
+            "alt": source_card.get("alt"),
         }
         for field, value in expected_fields.items():
             if asset.get(field) != value:
@@ -251,10 +290,15 @@ def validate_listing_media(errors: list[str], manifest: dict[str, Any]) -> None:
             continue
         width, height = struct.unpack(">II", data[16:24])
         if {"width": width, "height": height} != EXPECTED_SCREENSHOT_SIZE:
-            fail(errors, f"Codex screenshot must be 1600x1000: {declared_path}")
+            fail(errors, f"Codex screenshot must be 706x722: {declared_path}")
+        if data[25] != 2:
+            fail(errors, f"Codex screenshot must be fully opaque RGB PNG: {declared_path}")
         digest = hashlib.sha256(data).hexdigest()
         if asset.get("sha256") != digest:
             fail(errors, f"listing media checksum mismatch: {declared_path}")
+        source_png = source_card.get("png")
+        if not isinstance(source_png, dict) or source_png.get("sha256") != digest:
+            fail(errors, f"BMC Creative Studio v3 source checksum mismatch: {declared_path}")
 
 
 def main() -> int:

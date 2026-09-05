@@ -8,7 +8,7 @@ Version 0.3.0 keeps the exact 37-skill implementation and adds one optional, rea
 
 ## Release status
 
-Version 0.3.0 is the current public beta. The read-only renderer is live at `https://mcp.8gnc.io/mcp` and was verified from an unauthenticated clean client before publication.
+Version 0.3.0 is the current release candidate. The latest tagged public beta remains `v0.2.1`. The endpoint at `https://mcp.8gnc.io/mcp` is reachable, but the v0.3 `v2.html` interface still requires an approved deployment and clean-client verification before the tag or directory update.
 
 ## Install
 
@@ -24,11 +24,11 @@ Claude installs the 37 skills without the MCP renderer. The Claude marketplace e
 ### Codex
 
 ```bash
-codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.3.0
+codex plugin marketplace add Branded-Mayhem-Collective-LLC/8gnc-plugin --ref v0.2.1
 codex plugin add 8gnc@8gnc
 ```
 
-Codex installs the same skills plus the declared read-only renderer connection. ChatGPT directory availability remains subject to platform review.
+This is the current tagged public install. After the release owner publishes and verifies `v0.3.0`, the same command may be pinned to `--ref v0.3.0`. Codex v0.3 installs the same skills plus the declared read-only renderer connection. ChatGPT directory availability remains subject to platform review.
 
 ## Start with a problem
 
@@ -46,7 +46,8 @@ The `diagnose-brand-growth` router names one primary constraint, marks what is o
 - one `diagnose-brand-growth` router
 - one shared `deep-research` engine
 - one Codex/ChatGPT MCP declaration for `render_working_diagnosis`
-- one MCP Apps UI resource at `ui://8gnc/working-diagnosis/v1.html`
+- one MCP Apps UI resource at `ui://8gnc/working-diagnosis/v2.html`
+- one focused inline result with expandable evidence and supplied specialist output
 - pinned source provenance and original MIT notices
 - provider-neutral instructions and package-relative helpers
 
@@ -54,7 +55,7 @@ The source packages historically counted `deep-research` in both Brandprint and 
 
 ## What the renderer does
 
-The 37 skills do the diagnostic work in the host. The remote renderer receives a caller-supplied `WorkingDiagnosisV1`, schema-validates and normalizes it, returns a complete Markdown fallback, and can present the same result as an interactive case file.
+The 37 skills do the diagnostic work in the host. The remote renderer receives a caller-supplied `WorkingDiagnosisV1`, schema-validates and normalizes it, returns a complete Markdown fallback, and can present the same result as a focused inline diagnosis. The component leads with one constraint and one first move; evidence, inference, and an optional caller-supplied specialist output stay available on demand. Explicit buttons can ask the host conversation to use or challenge the route. They do not execute the recommendation or mutate an external system.
 
 The renderer does not determine whether a diagnosis is true, decide how long evidence remains useful, perform research, fetch external URLs, or generate missing evidence. Missing provenance or a valid non-future as-of date must produce a blocked result or schema error rather than invented support.
 

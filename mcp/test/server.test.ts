@@ -93,6 +93,28 @@ describe("8gnc MCP contract", () => {
           ],
           firstMove: "Review the offer page against recent prospect questions."
         },
+        artifact: {
+          title: "Homepage decision map",
+          method: "ux-ui-psych",
+          summary: "One guided entry point and the proof that belongs around it.",
+          items: [
+            {
+              label: "Before the first CTA",
+              detail: "Show one buyer problem and one recommended offer.",
+              basedOnEvidenceIds: ["august-funnel"]
+            },
+            {
+              label: "After the first CTA",
+              detail: "Explain fit and the engagement before booking.",
+              basedOnEvidenceIds: ["august-funnel"]
+            },
+            {
+              label: "Work to hold",
+              detail: "Hold acquisition expansion until the choice is tested.",
+              basedOnEvidenceIds: ["august-funnel"]
+            }
+          ]
+        },
         decisionGate: {
           required: true,
           question: "Do you want to test offer clarity first?"
@@ -102,11 +124,13 @@ describe("8gnc MCP contract", () => {
 
     expect(result.isError).not.toBe(true);
     const structured = result.structuredContent as {
-      diagnosis: { status: string };
+      diagnosis: { status: string; artifact?: { title: string } };
       markdown: string;
     };
     expect(structured.diagnosis.status).toBe("working");
+    expect(structured.diagnosis.artifact?.title).toBe("Homepage decision map");
     expect(structured.markdown).toContain("# Working Diagnosis");
+    expect(structured.markdown).toContain("## Specialist artifact");
     expect(result.content[0]).toEqual({ type: "text", text: structured.markdown });
   });
 

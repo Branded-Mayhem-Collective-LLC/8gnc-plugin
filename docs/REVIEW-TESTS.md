@@ -38,9 +38,9 @@ These cases cover the public 0.3.0 release in a clean host environment. No priva
 
 ### 6. Complete working diagnosis
 
-- **Fixture:** A valid `WorkingDiagnosisV1` with dated provenance, evidence IDs, an evidence-linked primary constraint, evidence-linked inferences, confidence, unknowns, a one-to-three-step route, and a human decision gate.
+- **Fixture:** A valid `WorkingDiagnosisV1` with dated provenance, evidence IDs, an evidence-linked primary constraint, evidence-linked inferences, confidence, unknowns, a one-to-three-step route, an evidence-linked caller-supplied specialist artifact, and a human decision gate.
 - **Expected tool result:** The structured result preserves the diagnosis and includes a complete Markdown fallback.
-- **Expected interface:** Input, Working Diagnosis, smallest useful route, and fallback views show the same facts. The interface adds no new claim.
+- **Expected interface:** The focused Working Diagnosis, first move, evidence disclosure, and optional specialist output show only supplied facts. The interface adds no new claim. The complete Markdown fallback remains in the tool response for hosts that do not render the interface.
 
 ### 7. Blocked diagnosis
 
@@ -55,11 +55,16 @@ These cases cover the public 0.3.0 release in a clean host environment. No priva
 ### 9. Plain-text host
 
 - **Fixture:** Invoke the renderer in a client that does not support MCP Apps UI.
-- **Expected result:** The Markdown response contains the complete diagnosis, route, evidence distinctions, unknowns, and decision gate.
+- **Expected result:** The Markdown response contains the complete diagnosis, route, evidence distinctions, supplied specialist artifact, unknowns, and decision gate.
 
 ### 10. Accessibility and containment
 
 - **Expected result:** Keyboard and reduced-motion use remain functional. The UI makes no external request, stores no browser state, sets no cookie, loads no remote asset, and submits no form.
+
+### 11. Invalid specialist artifact
+
+- **Fixture:** A working result whose artifact repeats a label or refers to an evidence ID that is absent.
+- **Expected result:** Schema or contract error. A blocked result that contains any artifact must also be rejected.
 
 ## Negative cases
 

@@ -1,6 +1,6 @@
 # Marketplace Submission Packet
 
-Use this document as the canonical copy source for the 0.3.0 OpenAI update and the skills-only Claude listing. The production endpoint is live; directory submission and approval remain separately tracked platform actions.
+Use this document as the canonical copy source for the 0.3.0 OpenAI update and the skills-only Claude listing. The production endpoint is reachable; exact v0.3 deployment, directory submission, approval, and publication remain separately tracked release actions.
 
 ## Identity
 
@@ -32,7 +32,7 @@ Diagnose what is actually blocking growth, separate evidence from assumption, an
 
 Bring an unclear offer, a stalled brand, weak conversion, invisible search presence, or a sales motion that is not moving. 8gnc identifies one primary constraint, labels evidence and uncertainty, and routes the work into the smallest useful sequence across brand strategy, product strategy, content and voice, search and AI visibility, conversion, and sales practice.
 
-In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as a read-only Working Diagnosis case file. The interface shows the supplied problem, evidence and inferences, the primary constraint, the smallest useful route, and the human decision gate. A complete Markdown result remains available without the interface.
+In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as a focused inline diagnosis. It leads with one primary constraint and one first move. Supporting evidence, inference, uncertainty, and an optional host-supplied specialist output remain available through expandable sections. The complete Markdown result remains in the tool response for hosts that do not render the interface. Explicit buttons can ask the host conversation to use or challenge the route; they do not execute the recommendation or mutate an external system.
 
 8gnc cannot access private client systems, approve work, send email, publish, purchase, deploy, or change external state. The renderer does not perform research or determine whether a diagnosis is true; it schema-validates, normalizes, serializes, and presents the structured result supplied by the host.
 
@@ -48,7 +48,8 @@ In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as 
 - Installed skill folders: **37**
 - MCP servers: **One public HTTP endpoint**
 - Tools: **One — `render_working_diagnosis`**
-- UI resources: **One — `ui://8gnc/working-diagnosis/v1.html`**
+- UI resources: **One — `ui://8gnc/working-diagnosis/v2.html`**
+- Public gallery: **Four states — diagnosis, expanded evidence, supplied output, and evidence required**
 - Tool properties: **read-only, non-destructive, closed-world**
 - Authentication: **None**
 - Publisher-operated durable storage: **None**
@@ -56,7 +57,7 @@ In compatible Codex and ChatGPT hosts, 8gnc can present the completed result as 
 - Outbound server fetches: **None**
 - Reviewer credentials: **Not required**
 
-The endpoint is `https://mcp.8gnc.io/mcp`. Production deployment and unauthenticated clean-client verification completed on 2026-09-04.
+The endpoint is `https://mcp.8gnc.io/mcp`. An unauthenticated audit on 2026-09-05 found the endpoint reachable but still exposing `ui://8gnc/working-diagnosis/v1.html`. Deploy and clean-client verify the reviewed `v2.html` candidate before submitting this update.
 
 ## Claude implementation declaration
 
@@ -69,7 +70,7 @@ The Claude marketplace entry uses the repository as its source with `strict: fal
 
 ## Release notes
 
-Version 0.3.0 preserves the 37-skill Brand Growth Diagnostic and adds one optional read-only Working Diagnosis renderer for compatible Codex and ChatGPT hosts. It returns the same evidence-backed result as structured content and complete Markdown, with an MCP Apps case-file interface when supported. Claude Code remains skills-only. The renderer is stateless, requires no account, makes no outbound request, and cannot access private systems or execute recommendations.
+Version 0.3.0 preserves the 37-skill Brand Growth Diagnostic and adds one optional read-only Working Diagnosis renderer for compatible Codex and ChatGPT hosts. It returns the same evidence-backed result, including a caller-supplied specialist artifact when present, as structured content and complete Markdown, with a focused inline MCP Apps interface when supported. Claude Code remains skills-only. The renderer is stateless, requires no account, makes no outbound request, and cannot access private systems or execute recommendations.
 
 ## Submission checks
 

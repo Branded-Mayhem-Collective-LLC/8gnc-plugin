@@ -13,14 +13,19 @@ import { build } from "esbuild";
 const WIDTH = 1600;
 const HEIGHT = 1000;
 const DEVICE_SCALE_FACTOR = 1;
-const VIEWS = ["input", "diagnosis", "route", "fallback"];
+const CAPTURES = [
+  { view: "diagnosis", triggerId: null, scrollTargetId: null },
+  { view: "evidence", triggerId: "wd-trigger-reasoning", scrollTargetId: "wd-trigger-reasoning" },
+  { view: "output", triggerId: "wd-trigger-output", scrollTargetId: "wd-trigger-output" },
+  { view: "blocked", triggerId: null, scrollTargetId: null, fixture: "blocked" }
+];
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(scriptDirectory, "../..");
 const uiSourcePath = join(repositoryRoot, "mcp/src/ui.ts");
 const fixturePath = join(repositoryRoot, "mcp/fixtures/gallery-working-diagnosis.json");
 const assetsDirectory = join(repositoryRoot, "plugins/8gnc/assets");
-const manifestPath = join(assetsDirectory, "listing-media-manifest.json");
+const manifestPath = join(assetsDirectory, "canonical-ui-capture-manifest.json");
 const execFileAsync = promisify(execFile);
 
 function chromeCandidates() {
@@ -78,8 +83,8 @@ async function loadMarkdownRenderer() {
 }
 
 function extractWorkingDiagnosisUi(source) {
-  const prefix = "export const WORKING_DIAGNOSIS_UI = `";
-  const suffix = "`;";
+  const prefix = "export const WORKING_DIAGNOSIS_UI = ";
+  const suffix = ";";
   const start = source.indexOf(prefix);
   const end = source.lastIndexOf(suffix);
 
@@ -87,9 +92,9 @@ function extractWorkingDiagnosisUi(source) {
     throw new Error("Could not extract WORKING_DIAGNOSIS_UI from mcp/src/ui.ts");
   }
 
-  const html = source.slice(start + prefix.length, end);
-  if (!html.startsWith("<!doctype html>") || html.includes("${") || html.includes("\\`")) {
-    throw new Error("WORKING_DIAGNOSIS_UI contains unsupported template interpolation or escaping");
+  const html = JSON.parse(source.slice(start + prefix.length, end));
+  if (typeof html !== "string" || !html.startsWith("<!doctype html>")) {
+    throw new Error("WORKING_DIAGNOSIS_UI must be a JSON-encoded HTML string");
   }
   return html;
 }
@@ -195,6 +200,27 @@ async function run() {
     diagnosis: fixtureInput.diagnosis,
     markdown: renderWorkingDiagnosisMarkdown(fixtureInput.diagnosis)
   };
+  const blockedDiagnosis = {
+    schemaVersion: "1.0",
+    status: "blocked",
+    input: {
+      summary: "Synthetic example: a studio wants to understand a drop in inquiries but has not supplied current source material."
+    },
+    reason: "There is not enough current evidence to name a growth constraint without guessing.",
+    missingEvidence: [
+      "A dated traffic-to-inquiry baseline",
+      "A current offer or landing-page sample",
+      "One direct source of buyer or sales feedback"
+    ],
+    decisionGate: {
+      required: true,
+      question: "Will you add one dated source so the diagnosis can continue?"
+    }
+  };
+  const blockedFixture = {
+    diagnosis: blockedDiagnosis,
+    markdown: renderWorkingDiagnosisMarkdown(blockedDiagnosis)
+  };
   const chromePath = await resolveChrome();
   const { stdout, stderr } = await execFileAsync(chromePath, ["--version"], { encoding: "utf8" });
   const chromeVersion = (stdout || stderr).trim();
@@ -250,6 +276,10 @@ async function run() {
       html
     });
     await waitForExpression(cdp, "document.readyState === 'complete'");
+    await waitForExpression(
+      cdp,
+      "document.getElementById('8gnc-working-diagnosis-root').children.length > 0"
+    );
 
     const notification = {
       jsonrpc: "2.0",
@@ -261,18 +291,45 @@ async function run() {
     });
     await waitForExpression(
       cdp,
-      "document.getElementById('case-status').textContent.trim() === 'Status / working'"
+      `document.body.textContent.includes(${JSON.stringify(fixture.diagnosis.primaryConstraint)})`
     );
 
     const assets = [];
-    for (const [index, view] of VIEWS.entries()) {
-      await cdp.send("Runtime.evaluate", {
-        expression: `document.querySelector('[data-view="${view}"]').click()`
-      });
-      await waitForExpression(
-        cdp,
-        `document.querySelector('[data-view="${view}"]').getAttribute('aria-selected') === 'true' && !document.getElementById('panel-${view}').hidden`
-      );
+    for (const [index, captureSpec] of CAPTURES.entries()) {
+      if (captureSpec.fixture === "blocked") {
+        const blockedNotification = {
+          jsonrpc: "2.0",
+          method: "ui/notifications/tool-result",
+          params: { structuredContent: blockedFixture }
+        };
+        await cdp.send("Runtime.evaluate", {
+          expression: `window.postMessage(${JSON.stringify(blockedNotification)}, "*"); document.body.style.paddingBottom = "0"; window.scrollTo(0, 0)`
+        });
+        await waitForExpression(
+          cdp,
+          `document.body.textContent.includes(${JSON.stringify(blockedDiagnosis.reason)})`
+        );
+      }
+      if (captureSpec.triggerId) {
+        await cdp.send("Runtime.evaluate", {
+          expression: `document.getElementById(${JSON.stringify(captureSpec.triggerId)}).click()`
+        });
+        await waitForExpression(
+          cdp,
+          `document.getElementById(${JSON.stringify(captureSpec.triggerId)}).getAttribute('aria-expanded') === 'true'`
+        );
+      }
+      if (captureSpec.scrollTargetId) {
+        await cdp.send("Runtime.evaluate", {
+          expression: `(() => {
+            document.body.style.paddingBottom = "600px";
+            const target = document.getElementById(${JSON.stringify(captureSpec.scrollTargetId)});
+            target.scrollIntoView({ block: "start" });
+            window.scrollBy(0, -32);
+            return true;
+          })()`
+        });
+      }
       await cdp.send("Runtime.evaluate", {
         expression: "new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))",
         awaitPromise: true
@@ -286,19 +343,20 @@ async function run() {
       const image = Buffer.from(capture.data, "base64");
       const dimensions = pngDimensions(image);
       if (dimensions.width !== WIDTH || dimensions.height !== HEIGHT) {
-        throw new Error(`Unexpected ${view} dimensions: ${dimensions.width}x${dimensions.height}`);
+        throw new Error(`Unexpected ${captureSpec.view} dimensions: ${dimensions.width}x${dimensions.height}`);
       }
 
-      const filename = `screenshot-${view}.png`;
+      const filename = `screenshot-${captureSpec.view}.png`;
       await writeFile(join(assetsDirectory, filename), image);
       assets.push({
         order: index + 1,
-        view,
+        view: captureSpec.view,
         filename,
         dimensions,
         sha256: createHash("sha256").update(image).digest("hex"),
         sourceFixture: "mcp/fixtures/gallery-working-diagnosis.json",
-        sourceUiPath: "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI"
+        sourceUiPath: "mcp/src/ui.ts#WORKING_DIAGNOSIS_UI",
+        sourceDesignAuthority: "8gnc website React component system and shared design tokens"
       });
     }
 
@@ -315,13 +373,13 @@ async function run() {
         height: HEIGHT,
         deviceScaleFactor: DEVICE_SCALE_FACTOR
       },
-      listingOrder: VIEWS,
+      listingOrder: CAPTURES.map(({ view }) => view),
       assets,
       futureUsage: {
-        chatgptListing: "Use the four frames in this exact order: input, diagnosis, route, fallback.",
-        website: "Use screenshot-diagnosis.png in the 8gnc hero; place input, route, and fallback below the fold in that order."
+        chatgptListing: "Use the four frames in this exact order: diagnosis, expanded evidence, supplied output, evidence-required state.",
+        website: "Use screenshot-diagnosis.png in the 8gnc hero; place evidence, output, and blocked below the fold only when the page needs supporting product detail."
       },
-      contentBoundary: "Synthetic demonstration data only. These captures contain no private, client, CRM, or production-system data."
+      contentBoundary: "Illustrative product walkthrough, not customer results. Synthetic demonstration data only. These captures contain no private, client, CRM, or production-system data."
     };
     await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     process.stdout.write(`${JSON.stringify(manifest, null, 2)}\n`);

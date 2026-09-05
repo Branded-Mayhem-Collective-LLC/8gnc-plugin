@@ -9,7 +9,7 @@ import {
 import { WORKING_DIAGNOSIS_UI } from "./ui";
 
 export const WORKING_DIAGNOSIS_TOOL_NAME = "render_working_diagnosis" as const;
-export const WORKING_DIAGNOSIS_UI_URI = "ui://8gnc/working-diagnosis/v1.html" as const;
+export const WORKING_DIAGNOSIS_UI_URI = "ui://8gnc/working-diagnosis/v2.html" as const;
 export const MCP_APP_MIME_TYPE = "text/html;profile=mcp-app" as const;
 
 const UI_META = {
@@ -21,7 +21,7 @@ const UI_META = {
     }
   },
   "openai/widgetDescription":
-    "A read-only 8gnc case file that presents supplied evidence, the working constraint, open questions, and the smallest useful route.",
+    "A focused inline 8gnc result that names the working constraint, recommends one first move, and keeps supporting evidence available on demand.",
   "openai/widgetPrefersBorder": true,
   "openai/widgetCSP": {
     connect_domains: [],
@@ -46,7 +46,7 @@ export function create8gncServer(): McpServer {
     WORKING_DIAGNOSIS_UI_URI,
     {
       title: "8gnc Working Diagnosis",
-      description: "Read-only interface for a supplied WorkingDiagnosisV1 result.",
+      description: "Focused inline interface for a supplied WorkingDiagnosisV1 result.",
       mimeType: MCP_APP_MIME_TYPE,
       _meta: UI_META
     },
